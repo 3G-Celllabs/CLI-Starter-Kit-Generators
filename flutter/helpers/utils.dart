@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:tote/models/states/border_types.dart';
 import 'package:uuid/uuid.dart';
 
 class Utilities {

@@ -20,7 +20,7 @@ class AppTheme {
   }
 
   static TextTheme _buildTextTheme() {
-    return TextTheme(
+    return const TextTheme(
       headline1: TextStyle(
         fontFamily: '',
         color: AppThemeColors.textPrimaryColor,
