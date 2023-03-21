@@ -8,52 +8,57 @@ import 'package:mqtt_client/mqtt_server_client.dart';
 import 'package:typed_data/typed_buffers.dart';
 
 class MqttService {
-  static String mqttUrl = dotenv.get('MQTT_URL');
-  static final MqttServerClient client = MqttServerClient(mqttUrl, '');
+  static final String _mqttUrl = dotenv.get('MQTT_URL');
+  static final MqttServerClient _client = MqttServerClient(_mqttUrl, '');
 
   static void setCustomConnectionMessage(
       MqttConnectMessage? connectionMessage) {
-    client.connectionMessage = connectionMessage;
+    _client.connectionMessage = connectionMessage;
   }
 
   static void useWebSocket(int port) {
-    client.useWebSocket = true;
-    client.port = port;
+    _client.useWebSocket = true;
+    _client.port = port;
   }
 
   static void setLogging({required bool on}) {
-    return client.logging(on: on);
+    return _client.logging(on: on);
   }
 
   static void setOnConnectedCallback(void Function()? onConnected) {
-    client.onConnected = onConnected;
+    _client.onConnected = onConnected;
   }
 
   static void setOnDisConnectedCallback(void Function()? onDisconnected) {
-    client.onSubscribeFail;
-    client.onUnsubscribed;
-
-    client.onDisconnected = onDisconnected;
+    _client.onDisconnected = onDisconnected;
   }
 
   static void setOnSubscribedCallback(void Function(String)? onSubscribed) {
-    client.onSubscribed = onSubscribed;
+    _client.onSubscribed = onSubscribed;
+  }
+
+  static void setOnSubscribeFailCallback(void Function(String)? onSubscribeFail) {
+        _client.onSubscribeFail = onSubscribeFail;
+  }
+
+  static void setOnUnsubscribedCallback(void Function(String)? onUnsubscribed) {
+    _client.onUnsubscribed = onUnsubscribed;
   }
 
   static MqttConnectionResult connect([String? username, String? password]) {
     try {
-      return MqttConnectionResult(client.connect(username, password), null);
+      return MqttConnectionResult(_client.connect(username, password), null);
     } on NoConnectionException catch (e) {
-      client.disconnect();
+      _client.disconnect();
       return MqttConnectionResult(Future.value(null), e);
     } on SocketException catch (e) {
-      client.disconnect();
+      _client.disconnect();
       return MqttConnectionResult(Future.value(null), e);
     }
   }
 
   static MqttClientConnectionStatus? getConnectionStatus() {
-    return client.connectionStatus;
+    return _client.connectionStatus;
   }
 
   static Uint8Buffer? buildMessageToPublish(var value) {
@@ -76,25 +81,25 @@ class MqttService {
     MqttQos qualityOfService = MqttQos.exactlyOnce,
     bool retain = false,
   }) {
-    return client.publishMessage(topic, qualityOfService, data, retain: retain);
+    return _client.publishMessage(topic, qualityOfService, data, retain: retain);
   }
 
   static Subscription? subscribeToTopic(
       {required String topic, MqttQos qosLevel = MqttQos.atMostOnce}) {
-    return client.subscribe(topic, qosLevel);
+    return _client.subscribe(topic, qosLevel);
   }
 
   static Stream<List<MqttReceivedMessage<MqttMessage>>>? listenForMessages() {
-    return client.updates;
+    return _client.updates;
   }
 
   static void unsubscribe(
       {required String topic, dynamic expectAcknowledge = false}) {
-    return client.unsubscribe(topic, expectAcknowledge: expectAcknowledge);
+    return _client.unsubscribe(topic, expectAcknowledge: expectAcknowledge);
   }
 
   static void disconnect() {
-    return client.disconnect();
+    return _client.disconnect();
   }
 }
 

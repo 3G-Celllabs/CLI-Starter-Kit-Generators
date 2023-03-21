@@ -4,8 +4,8 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 
 class HttpService {
-  static final http.Client client = http.Client();
-  static String baseUrl = dotenv.get('BASE_URL');
+  static final http.Client _client = http.Client();
+  static final String _baseUrl = dotenv.get('BASE_URL');
 
   static Future<http.Response> get({
     required String url,
@@ -13,8 +13,8 @@ class HttpService {
     Map<String, String>? header,
   }) async {
     try {
-      final response = await http.get(
-        Uri.parse('$baseUrl$url?$params'),
+      final response = await _client.get(
+        Uri.parse('$_baseUrl$url?$params'),
         headers: header,
       );
       return response;
@@ -35,8 +35,8 @@ class HttpService {
         'Content-Type',
         () => 'application/json',
       );
-      final response = await http.post(
-        Uri.parse(baseUrl + url),
+      final response = await _client.post(
+        Uri.parse(_baseUrl + url),
         headers: headers,
         body: jsonEncode(body),
       );
@@ -58,8 +58,8 @@ class HttpService {
         'Content-Type',
         () => 'application/json',
       );
-      final response = await http.delete(
-        Uri.parse(baseUrl + url),
+      final response = await _client.delete(
+        Uri.parse(_baseUrl + url),
         headers: headers,
         body: jsonEncode(body),
       );

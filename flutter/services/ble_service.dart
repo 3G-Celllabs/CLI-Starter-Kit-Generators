@@ -1,13 +1,13 @@
 import 'package:flutter_reactive_ble/flutter_reactive_ble.dart';
 
 class BleService {
-  static final flutterReactiveBle = FlutterReactiveBle();
+  static final _flutterReactiveBle = FlutterReactiveBle();
 
   static Stream<DiscoveredDevice> scanForDevices({
     List<Uuid>? withServices,
     scanMode = ScanMode.lowLatency,
   }) {
-    return flutterReactiveBle.scanForDevices(
+    return _flutterReactiveBle.scanForDevices(
       withServices: withServices ?? [],
       scanMode: scanMode,
     );
@@ -18,7 +18,7 @@ class BleService {
     Map<Uuid, List<Uuid>>? servicesWithCharacteristicsToDiscover,
     int timeOut = 2,
   }) {
-    return flutterReactiveBle.connectToDevice(
+    return _flutterReactiveBle.connectToDevice(
       id: deviceId,
       servicesWithCharacteristicsToDiscover:
           servicesWithCharacteristicsToDiscover ?? {},
@@ -28,10 +28,10 @@ class BleService {
 
   static Future<List<DiscoveredService>> discoverServices(
       {required String deviceId}) async {
-    return await flutterReactiveBle.discoverServices(deviceId);
+    return await _flutterReactiveBle.discoverServices(deviceId);
   }
 
-  static buildCharacteristic({
+  static QualifiedCharacteristic buildCharacteristic({
     required Uuid characteristicId,
     required Uuid serviceId,
     required String deviceId,
@@ -53,8 +53,9 @@ class BleService {
       deviceId: deviceId,
     );
     try {
+      const readDataResponse = _flutterReactiveBle.readCharacteristic(characteristic);
       return BleReadResponse(
-          flutterReactiveBle.readCharacteristic(characteristic), null);
+          readDataResponse, null);
     } catch (e) {
       return BleReadResponse(null, e);
     }
@@ -73,12 +74,12 @@ class BleService {
     );
     try {
       if (withResponse) {
-        await flutterReactiveBle.writeCharacteristicWithResponse(
+        await _flutterReactiveBle.writeCharacteristicWithResponse(
           characteristic,
           value: data,
         );
       } else {
-        await flutterReactiveBle.writeCharacteristicWithoutResponse(
+        await _flutterReactiveBle.writeCharacteristicWithoutResponse(
           characteristic,
           value: data,
         );
@@ -98,7 +99,7 @@ class BleService {
       serviceId: notifyChar.serviceId,
       deviceId: deviceId,
     );
-    return flutterReactiveBle.subscribeToCharacteristic(characteristic);
+    return _flutterReactiveBle.subscribeToCharacteristic(characteristic);
   }
 
   // This function can be used if the data sent to device is larger in size
@@ -110,32 +111,35 @@ class BleService {
   }) async {
     // There is no guarentee that the $requiredMtuSize will be set, but this operation will return the actual negotiated MTU size
     try {
-      return BleNegotiateMtuResponse(
-          flutterReactiveBle.requestMtu(
+      const requestMtuResponse = _flutterReactiveBle.requestMtu(
             deviceId: deviceId,
             mtu: requiredMtuSize,
-          ),
+          );
+      return BleNegotiateMtuResponse(
+          requestMtuResponse,
           null);
     } catch (e) {
       return BleNegotiateMtuResponse(null, e);
     }
   }
+
+  BleService().readCharacteristic
 }
 
 class BleReadResponse {
-  final Future<List<int>>? type1;
-  final Object? type2;
-  BleReadResponse(this.type1, this.type2);
+  final Future<List<int>>? result;
+  final Object? exception;
+  BleReadResponse(this.result, this.exception);
 }
 
 class BleWriteResponse {
   final bool success;
-  final Object? error;
-  BleWriteResponse(this.success, this.error);
+  final Object? exception;
+  BleWriteResponse(this.success, this.exception);
 }
 
 class BleNegotiateMtuResponse {
-  final Future<int>? type1;
-  final Object? type2;
-  BleNegotiateMtuResponse(this.type1, this.type2);
+  final Future<int>? result;
+  final Object? exception;
+  BleNegotiateMtuResponse(this.result, this.exception);
 }
