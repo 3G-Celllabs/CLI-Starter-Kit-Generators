@@ -4,7 +4,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 
 class HttpService {
-  static var client = http.Client();
+  static final http.Client client = http.Client();
   static String baseUrl = dotenv.get('BASE_URL');
 
   static Future<http.Response> get({
