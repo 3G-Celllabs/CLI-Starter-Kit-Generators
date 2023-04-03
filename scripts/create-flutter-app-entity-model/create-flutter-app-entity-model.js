@@ -254,7 +254,7 @@ async function copyNecessaryFiles() {
     }
   }
   if (process.cwd().split("/").pop() !== "lib") {
-    // Only possibility is else in for loop
+    // Only possibility for this is, else in for loop
     changeWorkingDirectory(`../../`);
   }
 }

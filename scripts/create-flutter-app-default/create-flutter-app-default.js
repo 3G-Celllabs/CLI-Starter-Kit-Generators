@@ -17,7 +17,9 @@ const baseUrl =
   "https://gitlab.com/pranay.prasad/utilities/-/raw/main/flutter/";
 
 const folders = [
-  "assets/images",
+  "assets/images/bitmaps",
+  "assets/images/svgs",
+  "lib/bindings",
   "lib/controllers",
   "lib/helpers",
   "lib/models/states",
@@ -30,8 +32,9 @@ const folders = [
 const defaultPackages = [
   "flutter_dotenv",
   "flutter_launcher_icons",
-  "logger",
+  "google_fonts",
   "intl",
+  "logger",
   "uuid",
 ];
 
@@ -114,7 +117,7 @@ async function updatePubspec() {
 flutter_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/images/bitmaps/round-logo.png"
+  image_path: "assets/images/bitmaps/logo.png"
   min_sdk_android: 21 # android min sdk min:16, default 21`;
 
     fs.appendFile("pubspec.yaml", dataToAppend, "utf8", (err) => {
@@ -194,11 +197,11 @@ function addFilesWithContent(fileName, content) {
 }
 
 async function copyNecessaryFiles() {
-  changeWorkingDirectory("../assets/images");
+  changeWorkingDirectory("../assets/images/bitmaps");
 
   // Copy assets
   await copyFile("assets/images/logo.png", "logo.png");
-  changeWorkingDirectory("../");
+  changeWorkingDirectory("../../");
 
   await copyFile("assets/.env", ".env");
   changeWorkingDirectory("../lib");
@@ -208,15 +211,15 @@ async function copyNecessaryFiles() {
 
   await copyFile("helpers/theme.dart", "theme.dart");
   await copyFile("helpers/utils.dart", "utils.dart");
+  await copyFile("helpers/api_routes.dart", "api_routes.dart");
 
   // Copy Splash, Home screens to views/screens folder
   changeWorkingDirectory("../views/screens/");
 
-  await copyFile("screens/splash_screen.dart", "splash_screen.dart");
   await copyFile("screens/home_screen.dart", "home_screen.dart");
+  await copyFile("screens/splash_screen.dart", "splash_screen.dart");
 
-  changeWorkingDirectory("../../");
-  // takes you to lib folder.
+  await createHomeFoldersAndFiles();
 
   for (const package of additionalPackages) {
     if (package["checked"] && package["url"] != null) {
@@ -226,8 +229,8 @@ async function copyNecessaryFiles() {
 
         changeWorkingDirectory("controllers/");
         await copyFile(
-          "controllers/splash_controller.dart",
-          "splash_controller.dart"
+          "controllers/common_controller.dart",
+          "common_controller.dart"
         );
 
         changeWorkingDirectory(`../routes/`);
@@ -244,6 +247,19 @@ async function copyNecessaryFiles() {
   if (process.cwd().split("/").pop() !== "lib") {
     changeWorkingDirectory(`../`);
   }
+}
+
+async function createHomeFoldersAndFiles() {
+  changeWorkingDirectory("../../bindings/");
+  await copyFile("bindings/home_binding.dart", "home_binding.dart");
+
+  changeWorkingDirectory("../controllers/");
+  await copyFile("controllers/home_controller.dart", "home_controller.dart");
+  changeWorkingDirectory("../services/");
+  await copyFile("services/home_service.dart", "home_service.dart");
+  changeWorkingDirectory("../");
+
+  // takes you to lib folder.
 }
 
 async function copyFile(fileUrl, destFolder) {

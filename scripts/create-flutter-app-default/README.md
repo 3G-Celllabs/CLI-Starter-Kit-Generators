@@ -1,4 +1,4 @@
-# Create Flutter App (Version 1.0.2)
+# Create Flutter App (Version 1.0.3)
 
 ## uses default folder structure
 
