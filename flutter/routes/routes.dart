@@ -11,5 +11,6 @@ List<GetPage> routes() => [
       GetPage(
         name: homeScreen,
         page: () => const HomeScreen(),
+        binding: HomeBinding(),
       ),
     ];

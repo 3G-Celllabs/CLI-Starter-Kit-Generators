@@ -53,9 +53,9 @@ class BleService {
       deviceId: deviceId,
     );
     try {
-      const readDataResponse = _flutterReactiveBle.readCharacteristic(characteristic);
-      return BleReadResponse(
-          readDataResponse, null);
+      Future<List<int>> readDataResponse =
+          _flutterReactiveBle.readCharacteristic(characteristic);
+      return BleReadResponse(readDataResponse, null);
     } catch (e) {
       return BleReadResponse(null, e);
     }
@@ -111,19 +111,15 @@ class BleService {
   }) async {
     // There is no guarentee that the $requiredMtuSize will be set, but this operation will return the actual negotiated MTU size
     try {
-      const requestMtuResponse = _flutterReactiveBle.requestMtu(
-            deviceId: deviceId,
-            mtu: requiredMtuSize,
-          );
-      return BleNegotiateMtuResponse(
-          requestMtuResponse,
-          null);
+      Future<int> requestMtuResponse = _flutterReactiveBle.requestMtu(
+        deviceId: deviceId,
+        mtu: requiredMtuSize,
+      );
+      return BleNegotiateMtuResponse(requestMtuResponse, null);
     } catch (e) {
       return BleNegotiateMtuResponse(null, e);
     }
   }
-
-  BleService().readCharacteristic
 }
 
 class BleReadResponse {

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
   static ThemeData lightTheme() {
     return ThemeData(
-      backgroundColor: AppThemeColors.white,
+      useMaterial3: true,
+      scaffoldBackgroundColor: AppThemeColors.white,
       brightness: Brightness.light,
       focusColor: AppThemeColors.black,
       textTheme: _buildTextTheme(),
@@ -12,89 +14,97 @@ class AppTheme {
 
   static ThemeData darkTheme() {
     return ThemeData(
-      backgroundColor: AppThemeColors.black,
+      useMaterial3: true,
+      scaffoldBackgroundColor: AppThemeColors.black,
       brightness: Brightness.dark,
       focusColor: AppThemeColors.white,
       textTheme: _buildTextTheme(),
     );
   }
 
-  static TextTheme _buildTextTheme() {
-    return const TextTheme(
-      headline1: TextStyle(
-        fontFamily: '',
-        color: AppThemeColors.textPrimaryColor,
-        fontWeight: FontWeight.bold,
-        fontSize: 48.0,
-      ),
-      headline2: TextStyle(
-        fontFamily: '',
-        color: AppThemeColors.primary,
-        fontWeight: FontWeight.bold,
-        fontSize: 34.0,
-      ),
-      headline3: TextStyle(
-        fontFamily: '',
-        fontWeight: FontWeight.bold,
-        color: AppThemeColors.textPrimaryColor,
-        fontSize: 28.0,
-      ),
-      headline4: TextStyle(
-        fontFamily: '',
-        color: AppThemeColors.textPrimaryColor,
-        fontWeight: FontWeight.bold,
-        fontSize: 20.0,
-      ),
-      headline5: TextStyle(
-        fontFamily: '',
-        color: AppThemeColors.textPrimaryColor,
-        fontWeight: FontWeight.bold,
-        fontSize: 16.0,
-      ),
-      headline6: TextStyle(
-        fontFamily: '',
-        color: AppThemeColors.textSecondaryColor,
-        fontWeight: FontWeight.bold,
-        fontSize: 16.0,
-      ),
-      subtitle1: TextStyle(
-        fontFamily: '',
-        color: AppThemeColors.textPrimaryColor,
-        fontWeight: FontWeight.w600,
-        fontSize: 16.0,
-      ),
-      subtitle2: TextStyle(
-        fontFamily: '',
-        color: AppThemeColors.textSecondaryColor,
-        fontWeight: FontWeight.w600,
-        fontSize: 16.0,
-      ),
-      bodyText1: TextStyle(
-        fontFamily: '',
-        color: AppThemeColors.textPrimaryColor,
-        fontWeight: FontWeight.normal,
-        fontSize: 14.0,
-      ),
-      bodyText2: TextStyle(
-        fontFamily: '',
-        color: AppThemeColors.textSecondaryColor,
-        fontWeight: FontWeight.normal,
-        fontSize: 14.0,
-      ),
-      button: TextStyle(
-        fontFamily: '',
-        color: AppThemeColors.textPrimaryColor,
-        fontWeight: FontWeight.w600,
-        fontSize: 16.0,
-      ),
-      caption: TextStyle(
-        fontFamily: '',
-        fontWeight: FontWeight.w300,
-        color: AppThemeColors.white,
-        fontSize: 12.0,
-      ),
-    );
-  }
+  static TextTheme _buildTextTheme() => TextTheme(
+        displayLarge: GoogleFonts.inter(
+          fontWeight: FontWeight.w400,
+          fontSize: 56,
+          height: 64 / 56,
+          letterSpacing: -0.25,
+        ),
+        displayMedium: GoogleFonts.inter(
+          fontWeight: FontWeight.w400,
+          fontSize: 44,
+          height: 52 / 44,
+        ),
+        displaySmall: GoogleFonts.inter(
+          fontWeight: FontWeight.w400,
+          fontSize: 36,
+          height: 44 / 36,
+        ),
+        headlineLarge: GoogleFonts.inter(
+          fontWeight: FontWeight.w400,
+          fontSize: 32,
+          height: 40 / 32,
+        ),
+        headlineMedium: GoogleFonts.poppins(
+          fontWeight: FontWeight.w400,
+          fontSize: 28,
+          height: 36 / 28,
+        ),
+        headlineSmall: GoogleFonts.inter(
+          fontWeight: FontWeight.w700,
+          fontSize: 24,
+          height: 32 / 24,
+        ),
+        titleLarge: GoogleFonts.poppins(
+          fontWeight: FontWeight.w600,
+          fontSize: 20,
+          height: 32 / 20,
+          color: AppThemeColors.textPrimaryColor,
+        ),
+        titleMedium: GoogleFonts.inter(
+          fontWeight: FontWeight.w600,
+          fontSize: 16,
+          height: 24 / 16,
+          letterSpacing: 0.1,
+        ),
+        titleSmall: GoogleFonts.poppins(
+          fontWeight: FontWeight.w500,
+          fontSize: 14,
+          height: 20 / 14,
+          color: AppThemeColors.textSecondaryColor,
+        ),
+        labelLarge: GoogleFonts.inter(
+          fontWeight: FontWeight.w700,
+          fontSize: 14,
+          height: 20 / 14,
+        ),
+        labelMedium: GoogleFonts.inter(
+          fontWeight: FontWeight.w400,
+          fontSize: 12,
+          height: 16 / 12,
+        ),
+        labelSmall: GoogleFonts.poppins(
+          fontWeight: FontWeight.w700,
+          fontSize: 11,
+          height: 16 / 11,
+          color: AppThemeColors.black,
+        ),
+        bodyLarge: GoogleFonts.poppins(
+          fontWeight: FontWeight.w400,
+          fontSize: 16,
+          height: 24 / 16,
+        ),
+        bodyMedium: GoogleFonts.poppins(
+          fontWeight: FontWeight.w400,
+          fontSize: 14,
+          height: 20 / 14,
+          color: AppThemeColors.textSecondaryColor,
+        ),
+        bodySmall: GoogleFonts.poppins(
+          fontWeight: FontWeight.w400,
+          fontSize: 12,
+          height: 16 / 12,
+        ),
+      );
 }
 
 class AppThemeColors {

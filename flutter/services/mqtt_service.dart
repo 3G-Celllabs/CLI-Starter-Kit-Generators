@@ -37,11 +37,13 @@ class MqttService {
     _client.onSubscribed = onSubscribed;
   }
 
-  static void setOnSubscribeFailCallback(void Function(String)? onSubscribeFail) {
-        _client.onSubscribeFail = onSubscribeFail;
+  static void setOnSubscribeFailCallback(
+      void Function(String)? onSubscribeFail) {
+    _client.onSubscribeFail = onSubscribeFail;
   }
 
-  static void setOnUnsubscribedCallback(void Function(String)? onUnsubscribed) {
+  static void setOnUnsubscribedCallback(
+      void Function(String?)? onUnsubscribed) {
     _client.onUnsubscribed = onUnsubscribed;
   }
 
@@ -81,7 +83,8 @@ class MqttService {
     MqttQos qualityOfService = MqttQos.exactlyOnce,
     bool retain = false,
   }) {
-    return _client.publishMessage(topic, qualityOfService, data, retain: retain);
+    return _client.publishMessage(topic, qualityOfService, data,
+        retain: retain);
   }
 
   static Subscription? subscribeToTopic(
