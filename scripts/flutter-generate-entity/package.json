@@ -1,0 +1,15 @@
+{
+  "name": "flutter-generate-entity",
+  "version": "1.0.0",
+  "description": "Helps generating entity for flutter app. That is, controllers, services, models etc., are bundled into entity folders such as Home, Login etc.,",
+  "main": "flutter-generate-entity.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^4.1.2"
+  }
+}
