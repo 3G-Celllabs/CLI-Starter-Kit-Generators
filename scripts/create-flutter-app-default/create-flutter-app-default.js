@@ -237,16 +237,20 @@ async function copyNecessaryFiles() {
         await copyFile(package["url"], "routes.dart");
         changeWorkingDirectory(`../`);
       } else {
-        if (process.cwd().split("/").pop() !== "services") {
+        if (splitDirectoryBasedOnPlatform().pop() !== "services") {
           changeWorkingDirectory(`services/`);
         }
         await copyFile(package["url"], package["url"].split("/").pop());
       }
     }
   }
-  if (process.cwd().split("/").pop() !== "lib") {
+  if (splitDirectoryBasedOnPlatform().pop() !== "lib") {
     changeWorkingDirectory(`../`);
   }
+}
+
+function splitDirectoryBasedOnPlatform() {
+  return process.platform === "win32" ? process.cwd().split("\\") : process.cwd().split("/");
 }
 
 async function createHomeFoldersAndFiles() {
@@ -288,7 +292,7 @@ async function copyFile(fileUrl, destFolder) {
 }
 
 async function initializeGit() {
-  if (process.cwd().split("/").pop() !== projectName) {
+  if (splitDirectoryBasedOnPlatform().split("/").pop() !== projectName) {
     changeWorkingDirectory(`../`);
   }
 

@@ -241,7 +241,7 @@ async function copyNecessaryFiles() {
         changeWorkingDirectory(`../../`);
         await copyFile(package["url"], "routes.dart");
       } else {
-        const currentDirectory = process.platform === "win32"?process.cwd().split("\\"): process.cwd().split("/");
+        const currentDirectory = splitDirectoryBasedOnPlatform();
         if (
           currentDirectory[currentDirectory.length - 2] !== "utilities" &&
           currentDirectory[currentDirectory.length - 1] !== "services"
@@ -253,10 +253,14 @@ async function copyNecessaryFiles() {
       }
     }
   }
-  if (process.cwd().split("/").pop() !== "lib") {
-    // Only possibility for this is, else in for loop
+  if (splitDirectoryBasedOnPlatform().pop() !== "lib") {
+    // Only possibility for this is "else" in for loop
     changeWorkingDirectory(`../../`);
   }
+}
+
+function splitDirectoryBasedOnPlatform() {
+  return process.platform === "win32" ? process.cwd().split("\\") : process.cwd().split("/");
 }
 
 async function createHomeFoldersAndFiles() {
@@ -311,7 +315,7 @@ async function copyFile(fileUrl, destFolder) {
 }
 
 async function initializeGit() {
-  if (process.cwd().split("/").pop() !== projectName) {
+  if (splitDirectoryBasedOnPlatform().pop() !== projectName) {
     changeWorkingDirectory(`../`);
   }
 
