@@ -241,7 +241,7 @@ async function copyNecessaryFiles() {
         changeWorkingDirectory(`../../`);
         await copyFile(package["url"], "routes.dart");
       } else {
-        const currentDirectory = process.cwd().split("/");
+        const currentDirectory = process.platform === "win32"?process.cwd().split("\\"): process.cwd().split("/");
         if (
           currentDirectory[currentDirectory.length - 2] !== "utilities" &&
           currentDirectory[currentDirectory.length - 1] !== "services"
