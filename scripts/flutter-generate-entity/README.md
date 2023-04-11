@@ -14,18 +14,22 @@ Go to script folder and install dependencies using
 npm install
 ```
 
+#### Instructions to setup the script to run from anywhere. Skip to [Alternate](#alt), if not needed
+
 The script can run directly from your terminal. For that to happen, you need to link it by running
 
 ```
 npm link
 ```
 
-Once linked, you can run the script by calling `flutter-gen`
+Once linked, you can run the script by calling `flutter-gen` from any path
 <br/>
 
 ### Below are the commands:
 
-(use, **-a** to generate all the folders and files. If you wish to choose what to include dont add **-a**)
+Move to the flutter app folder and run
+
+(use, **-a** to generate all the folders and files. If you wish to choose what to include don't add **-a**)
 
 ```
 flutter-gen -n ${entity_name} -a
@@ -34,8 +38,10 @@ flutter-gen -n ${entity_name} -a
 To see help menu, run
 
 ```
-flutter-gen -help
+flutter-gen --help
 ```
+
+<a id="alt"></a>
 
 ### Alternatively, you can skip linking and directly run below commands:
 

@@ -57,7 +57,13 @@ async function evaluateArgsAndGenerate() {
 
 async function generateFolders() {
   changeWorkingDirectory("lib/");
-  if (fs.existsSync(`${process.cwd()}/${entityName}`)) {
+  if (
+    fs.existsSync(
+      process.platform === "win32"
+        ? `${process.cwd()}\\${entityName}`
+        : `${process.cwd()}/${entityName}`
+    )
+  ) {
     ora("").fail(
       chalk.red(`Entity already exists. Please choose a different name.`)
     );
