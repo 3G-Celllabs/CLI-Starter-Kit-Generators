@@ -1,10 +1,10 @@
-# Generate Flutter Entity (Version 1.0.0)
+# Generate Flutter Entity (Version 1.0.1)
 
 <br/>
 
-### Instructions:
+## Instructions:
 
-This is a node script that helps generating entity for flutter app. That is, controllers, services, models etc., are bundled into entity folders such as Home, Login etc.,
+This is a node script that helps generating entity for flutter app. That means controllers, services, models etc., are bundled into entity folders such as Home, Login etc.,
 
 First thing first, (If you don't have it) Install node from [Node.js](https://nodejs.org/en/download/)
 
@@ -14,10 +14,43 @@ Go to script folder and install dependencies using
 npm install
 ```
 
-Then, move to the folder where you wish to setup your flutter application and run the script using
+The script can run directly from your terminal. For that to happen, you need to link it by running
 
 ```
-node ./${YOUR-SCRIPT_LOCATION}/flutter-generate-entity.js ${entity_name}
+npm link
+```
+
+Once linked, you can run the script by calling `flutter-gen`
+<br/>
+
+### Below are the commands:
+
+(use, **-a** to generate all the folders and files. If you wish to choose what to include dont add **-a**)
+
+```
+flutter-gen -n ${entity_name} -a
+```
+
+To see help menu, run
+
+```
+flutter-gen -help
+```
+
+### Alternatively, you can skip linking and directly run below commands:
+
+Move to the folder where you wish to setup your flutter application and run the script using
+
+(use, **-a** to generate all the folders and files. If you wish to choose what to include dont add **-a**)
+
+```
+node ./${YOUR-SCRIPT_LOCATION}/flutter-generate-entity.js -n ${entity_name} -a
+```
+
+To open help, run
+
+```
+node ./${YOUR-SCRIPT_LOCATION}/flutter-generate-entity.js --help
 ```
 
 **NOTE:** Run the script from flutter app.

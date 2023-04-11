@@ -1,38 +1,127 @@
+#!/usr/bin/env node
 const fs = require("fs");
 const chalk = require("chalk");
+const ora = require("ora");
+const inquirer = require("inquirer");
+const {
+  createFolder,
+  changeWorkingDirectory,
+  addFilesWithContent,
+  capitalize,
+} = require("./utils/utilities");
+
+const argv = require("yargs/yargs")(process.argv.slice(2))
+  .option("name", {
+    alias: "n",
+    describe: "Entity name",
+  })
+  .option("all", {
+    alias: "a",
+    describe: "Generate all the folders and files",
+    boolean: true,
+  })
+  .demandOption(["name"], "Please specify the name of the entity.")
+  .help().argv;
 
 let entityName = "";
 
-function evaluateArgs() {
-  entityName = process.argv[2];
-  if (
-    !entityName.match(/^[a-zA-Z_]*$/) ||
-    entityName[entityName.length - 1] === "_"
-  ) {
-    console.error(
+const types = [
+  { name: "models", checked: false },
+  { name: "states", checked: false },
+  { name: "widgets", checked: false },
+  { name: "binding", checked: false },
+  { name: "controller", checked: false },
+  { name: "screen", checked: true },
+  { name: "service", checked: false },
+];
+
+(async () => {
+  await evaluateArgsAndGenerate();
+
+  endScript();
+})();
+
+async function evaluateArgsAndGenerate() {
+  if (!argv.name.match(/[a-zA-Z]+(?:_[a-zA-Z]+)*/g)) {
+    ora("").fail(
       chalk.red(
-        `Invalid entity name. Only names in flutter pattern are supported`
+        `Invalid entity name. Only kebab case (my_app) names are supported.`
       )
     );
     process.exit(1);
   } else {
-    generateFolders();
+    entityName = argv.name;
+    await generateFolders();
   }
 }
 
-function generateFolders() {
+async function generateFolders() {
   changeWorkingDirectory("lib/");
-  createFolder(entityName);
-  changeWorkingDirectory(entityName, true);
-  console.log("\n");
+  if (fs.existsSync(`${process.cwd()}/${entityName}`)) {
+    ora("").fail(
+      chalk.red(`Entity already exists. Please choose a different name.`)
+    );
+    process.exit(1);
+  } else {
+    createFolder(entityName);
+    changeWorkingDirectory(entityName, true);
+    console.log("\n");
+    if (argv.all) {
+      const packages = [
+        "models",
+        "states",
+        "widgets",
+        "binding",
+        "controller",
+        "screen",
+        "service",
+      ];
+      evaluateAnswer(packages);
+    } else {
+      await inquirer
+        .prompt([
+          {
+            type: "checkbox",
+            message: "Select what to include:",
+            name: "packages",
+            choices: types,
+          },
+        ])
+        .then((answer) => {
+          evaluateAnswer(answer.packages);
+        })
+        .catch((error) => {
+          ora("").fail(chalk.red(`Error: ${error}`));
+          process.exit(1);
+        });
+    }
+  }
+}
 
-  createModels();
-  createStates();
-  createWidgets();
-  addBindings();
-  addController();
-  addScreen();
-  addService();
+function evaluateAnswer(packages) {
+  packages.forEach((package) => {
+    if (package === "models") {
+      createModels();
+    }
+    if (package === "states") {
+      createStates();
+    }
+    if (package === "widgets") {
+      createWidgets();
+    }
+    if (package === "binding") {
+      addBindings();
+    }
+    if (package === "controller") {
+      addController();
+    }
+    if (package === "screen") {
+      addScreen();
+    }
+    if (package === "service") {
+      addService();
+    }
+  });
 }
 
 function createModels() {
@@ -74,9 +163,7 @@ function addScreen() {
       entityName
     )}Screen extends StatelessWidget {\nconst ${capitalize(
       entityName
-    )}Screen({super.key});\n@override \nWidget build(BuildContext context){\nreturn const Scaffold(body: SafeArea(child: Center(child: Text('${capitalize(
-      entityName
-    )} Screen'),),),);\n}\n}`
+    )}Screen({super.key});\n@override \nWidget build(BuildContext context){\nreturn const Scaffold(body: SafeArea(child: Placeholder(),),);\n}\n}`
   );
 
   console.log(chalk.yellow(`Added ${entityName}_screen.dart file.`));
@@ -90,48 +177,8 @@ function addService() {
   console.log(chalk.yellow(`Added ${entityName}_service.dart file.`));
 }
 
-function changeWorkingDirectory(dir, showLog = false) {
-  try {
-    process.chdir(`${dir}`);
-    if (showLog) console.log(chalk.yellow(`Moved in to ${dir} directory.`));
-  } catch (err) {
-    console.error(chalk.red(`Unable to change dir: ${err}`));
-    process.exit(1);
-  }
-}
-
-function createFolder(folder) {
-  try {
-    fs.mkdirSync(`${folder}`, { recursive: true });
-    console.log(chalk.yellow(`Created ${folder} directory.`));
-  } catch (e) {
-    console.error(chalk.red(`Unable to create ${folder} directory.`));
-  }
-}
-
-function addFilesWithContent(fileName, content) {
-  fs.writeFileSync(fileName, content);
-  console.log(chalk.yellow(`Added ${fileName} file`));
-}
-
-function capitalize(word) {
-  let newWord = "";
-  word.split("_").forEach((value) => {
-    newWord += value[0].toUpperCase() + value.slice(1);
-  });
-  return newWord;
-}
-
 function endScript() {
   console.log("\n");
-  console.log(chalk.green("SUCCESS:: Entity created successfully!"));
+  ora("").succeed(chalk.green(` Entity ${entityName} created successfully!`));
   process.exit(0);
 }
-
-async function main() {
-  evaluateArgs();
-
-  endScript();
-}
-
-main();
