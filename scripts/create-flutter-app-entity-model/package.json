@@ -1,15 +1,20 @@
 {
-  "name": "create-flutter-app-entity-model",
-  "version": "1.0.0",
+  "name": "flutter-create-entity",
+  "version": "1.0.1",
   "description": "Helps creating flutter app with entity model. That is, controllers, services, models etc., are bundled into entity folders such as Home, Login etc.,",
-  "main": "create-flutter-app.js",
+  "main": "create-flutter-app-entity-model.js",
+  "bin": "create-flutter-app-entity-model.js",
+  "preferGlobal": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "Pranay Prasad V",
   "license": "ISC",
   "dependencies": {
-    "chalk": "^4.1.2"
+    "chalk": "^4.1.2",
+    "inquirer": "^8.0.0",
+    "ora": "^5.4.1",
+    "yargs": "^17.7.1"
   }
 }

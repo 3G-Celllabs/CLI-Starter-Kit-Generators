@@ -1,4 +1,4 @@
-# Create Flutter App (Version 1.0.0)
+# Create Flutter App (Version 1.0.1)
 
 ## uses entity folder structure
 
@@ -16,15 +16,77 @@ Go to script folder and install dependencies using
 npm install
 ```
 
-Then, move to the folder where you wish to setup your flutter application and run the script using
+#### Instructions to setup the script to run from anywhere. Skip to [Alternate](#alt), if not needed
+
+The script can run directly from your terminal. For that to happen, you need to link it by running
 
 ```
-node ./${YOUR-SCRIPT_LOCATION}/create-flutter-app-default.js
+npm link
 ```
+
+Once linked, you can run the script by calling `flutter-create-entity` from any path
+<br/>
+
+### Below are the commands:
+
+Move to the folder where you want to create the flutter app and run
+
+(use, **-a** to generate all the folders and files. If you wish to choose what to include don't add **-a**)
+
+```
+flutter-create-entity
+```
+
+To see help menu, run
+
+```
+flutter-create-entity --help
+
+Output:
+
+      --version       Show version number                              [boolean]
+  -n, --name          entity name                                       [string]
+  -a, --all           with all (getx, mqtt, http, ble) packages        [boolean]
+  -g, --get           with GetX                                        [boolean]
+  -h, --http          with http                                        [boolean]
+  -m, --mqtt          with mqtt                                        [boolean]
+  -b, --ble           with ble                                         [boolean]
+      --no-pub, --np  cancel updating pubspec.yaml file                [boolean]
+      --no-git, --ng  do not initialize git                            [boolean]
+      --help          Show help                                        [boolean]
+```
+
+So, for example, to create flutter app, `my_app` with getx, mqtt packages. You can run below command:
+
+```
+flutter-create-entity -n my_app -g -m
+```
+
+**\*NOTE**: You can just run `flutter-create-entity` to provide/choose necessary options\*
+
+<br/>
+
+<a id="alt"></a>
+
+### Alternatively, you can skip linking and directly run below commands:
+
+Move to the folder where you wish to setup your flutter application and run the script using
+
+To see all the options. Run
+
+```
+node ./[YOUR-SCRIPT_LOCATION]/create-flutter-app-entity-model.js --help
+```
+
+```
+node ./[YOUR-SCRIPT_LOCATION]/create-flutter-app-entity-model.js
+```
+
+### Description:
 
 1. This will run the script and the first prompt within the script would be to name your flutter app (follow underscore pattern, eg: dummy_app).
 
-2. Once the flutter app is setup. It will create folders such as home, splash, utilities (containing controller, services, models etc.,) etc.,
+2. Once the flutter app is setup. It will create folders such as home, splash, utilities (containing controller, services, models etc.,).
 
 3. Then, It will install some flutter packages such as "flutter_dotenv", "uuid", "intl" that will help with app development. (If you feel like you don't need any of the plugins. Please, remove them from pubspec.yaml and run flutter pub get, once the script is finished.)
 
@@ -38,9 +100,9 @@ flutter_icons:
   min_sdk_android: 21 # android min sdk min:16, default 21`;
 ```
 
-Please, update the image_path with your logo path.
+&nbsp;&nbsp;&nbsp;&nbsp;Please, update the image_path with your logo path.
 
-Using the above script, we can generate app icons, by running (when we need)
+&nbsp;&nbsp;&nbsp;&nbsp;Using the above script, we can generate app icons, by running (when we need)
 
 ```
 flutter pub run flutter_launcher_icons
@@ -57,7 +119,7 @@ flutter pub run flutter_launcher_icons
 https://gitlab.com/pranay.prasad/utilities/-/raw/main/flutter/
 ```
 
-which will help with development and help you understand how to structure the app. Based on your what packages you choose to install above, It will even copy the service files with base implementation.
+&nbsp;&nbsp;&nbsp;&nbsp;which will help with development and help you understand how to structure the app. Based on your what packages you choose to install above, It will even copy the service files with base implementation.
 
 8. Flutter applications are not initialized with git by default. Hence, the script will also initialize git, to provide a base reference.
 
