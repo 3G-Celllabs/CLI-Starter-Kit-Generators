@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+const chalk = require("chalk");
 const inquirer = require("inquirer");
 
 const { copyNecessaryFiles } = require("./main/copy-necessary-files");
@@ -8,11 +9,11 @@ const { generateFolders } = require("./main/generate-folders");
 const {
   initializeFlutterProject,
 } = require("./main/initialize-flutter-project");
+const { initializeGit } = require("./main/initialize-git");
 const {
   installAdditionalPackages,
 } = require("./main/install-additional-packages");
 const { installDefaultPackages } = require("./main/install-default-packages");
-const { initializeGit } = require("./main/initialize-git");
 const { updatePubspec } = require("./main/update-pubspec");
 
 const { ask } = require("./utils/ask");
@@ -70,6 +71,7 @@ const argv = require("yargs/yargs")(process.argv.slice(2))
     describe: "do not initialize git",
     boolean: true,
   })
+  .usage("$0 [option] [value]")
   .help().argv;
 
 (async () => {

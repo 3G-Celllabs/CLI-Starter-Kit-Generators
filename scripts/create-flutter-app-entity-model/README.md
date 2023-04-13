@@ -44,6 +44,8 @@ flutter-create-entity --help
 
 Output:
 
+flutter-create-entity [option] [value]
+Options:
       --version       Show version number                              [boolean]
   -n, --name          entity name                                       [string]
   -a, --all           with all (getx, mqtt, http, ble) packages        [boolean]
