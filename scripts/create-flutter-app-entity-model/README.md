@@ -1,4 +1,4 @@
-# Create Flutter App (Version 1.0.1)
+# Create Flutter App (Version 1.1.0)
 
 ## uses entity folder structure
 

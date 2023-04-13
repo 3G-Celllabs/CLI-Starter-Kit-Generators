@@ -1,4 +1,4 @@
-# Generate Flutter Entity (Version 1.0.1)
+# Generate Flutter Entity (Version 1.1.0)
 
 <br/>
 
