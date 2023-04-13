@@ -12,7 +12,7 @@ Flutter folder contains dart utility classes that assist in generating the flutt
 
 There are two different scripts that can be used to generate flutter apps.
 
-1. `create-flutter-app-default`: This will generate a flutter app with controllers, services, models folders as top level citizens(Basic MVC).
+1. `create-flutter-app-mvc`: This will generate a flutter app with controllers, services, models folders as top level citizens(Basic MVC).
 
 2. `create-flutter-app-entity-model`: This will generate a flutter app implementing new entity pattern. That is, every entity such as home, login etc., will contain their own controllers, services, models. The main philosophical reason for doing this is every entity should be self contained(depending on its own classes and maybe some common classes).
 
