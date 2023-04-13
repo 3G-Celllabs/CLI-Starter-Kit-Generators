@@ -49,6 +49,26 @@ const additionalPackages = [
   },
 ];
 
+(async () => {
+  await initializeFlutterProject();
+
+  generateFolders();
+
+  await installDefaultPackages();
+
+  await updatePubspec();
+
+  await installAdditionalPackages();
+
+  await createNecessaryFiles();
+
+  await copyNecessaryFiles();
+
+  await initializeGit();
+
+  endScript();
+})();
+
 async function initializeFlutterProject() {
   const answer = await ask("Enter app name: ");
 
@@ -66,7 +86,7 @@ async function initializeFlutterProject() {
 }
 
 async function ask(questionText) {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve, _) => {
     rl.question(chalk.blue(questionText), (input) => resolve(input));
   });
 }
@@ -343,25 +363,3 @@ function endScript() {
   );
   process.exit(0);
 }
-
-async function main() {
-  await initializeFlutterProject();
-
-  generateFolders();
-
-  await installDefaultPackages();
-
-  await updatePubspec();
-
-  await installAdditionalPackages();
-
-  await createNecessaryFiles();
-
-  await copyNecessaryFiles();
-
-  await initializeGit();
-
-  endScript();
-}
-
-main();
