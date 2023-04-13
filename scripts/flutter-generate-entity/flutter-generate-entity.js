@@ -10,6 +10,16 @@ const {
   capitalize,
 } = require("./utils/utilities");
 
+const types = [
+  { name: "models", checked: false },
+  { name: "states", checked: false },
+  { name: "widgets", checked: false },
+  { name: "binding", checked: false },
+  { name: "controller", checked: false },
+  { name: "screen", checked: true },
+  { name: "service", checked: false },
+];
+
 const argv = require("yargs/yargs")(process.argv.slice(2))
   .option("name", {
     alias: "n",
@@ -24,16 +34,6 @@ const argv = require("yargs/yargs")(process.argv.slice(2))
   .help().argv;
 
 let entityName = "";
-
-const types = [
-  { name: "models", checked: false },
-  { name: "states", checked: false },
-  { name: "widgets", checked: false },
-  { name: "binding", checked: false },
-  { name: "controller", checked: false },
-  { name: "screen", checked: true },
-  { name: "service", checked: false },
-];
 
 (async () => {
   await evaluateArgsAndGenerate();

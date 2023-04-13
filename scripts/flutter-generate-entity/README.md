@@ -32,7 +32,9 @@ Move to the flutter app folder and run
 (use, **-a** to generate all the folders and files. If you wish to choose what to include don't add **-a**)
 
 ```
-flutter-gen -n ${entity_name} -a
+flutter-gen -n [entity_name] -a
+    or
+flutter-gen --name [entity_name] --all
 ```
 
 To see help menu, run
@@ -50,7 +52,9 @@ Move to the folder where you wish to setup your flutter application and run the 
 (use, **-a** to generate all the folders and files. If you wish to choose what to include dont add **-a**)
 
 ```
-node ./${YOUR-SCRIPT_LOCATION}/flutter-generate-entity.js -n ${entity_name} -a
+node ./${YOUR-SCRIPT_LOCATION}/flutter-generate-entity.js -n [entity_name] -a
+    or
+node ./${YOUR-SCRIPT_LOCATION}/flutter-generate-entity.js --name [entity_name] --all
 ```
 
 To open help, run
