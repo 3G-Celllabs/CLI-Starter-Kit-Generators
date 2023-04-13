@@ -31,6 +31,7 @@ const argv = require("yargs/yargs")(process.argv.slice(2))
     boolean: true,
   })
   .demandOption(["name"], "Please specify the name of the entity.")
+  .usage("$0 [--name|-n] [value] [option] [value]")
   .help().argv;
 
 let entityName = "";

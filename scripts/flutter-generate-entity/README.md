@@ -41,6 +41,15 @@ To see help menu, run
 
 ```
 flutter-gen --help
+
+Output:
+
+flutter-generate-entity.js [--name|-n] [value] [option] [value]
+Options:
+      --version  Show version number                                   [boolean]
+  -n, --name     Entity name                                          [required]
+  -a, --all      Generate all the folders and files                    [boolean]
+      --help     Show help                                             [boolean]
 ```
 
 <a id="alt"></a>
