@@ -16,11 +16,75 @@ Go to script folder and install dependencies using
 npm install
 ```
 
-Then, move to the folder where you wish to setup your flutter application and run the script using
+#### Instructions to setup the script to run from anywhere. Skip to [Alternate](#alt), if not needed
+
+The script can run directly from your terminal. For that to happen, you need to link it by running
 
 ```
-node ./${YOUR-SCRIPT_LOCATION}/create-flutter-app-default.js
+npm link
 ```
+
+Once linked, you can run the script by calling `flutter-create-mvc` from any path
+<br/>
+
+### Below are the commands:
+
+Move to the folder where you want to create the flutter app and run
+
+(use, **-a** to generate all the folders and files. If you wish to choose what to include don't add **-a**)
+
+```
+flutter-create-mvc
+```
+
+To see help menu, run
+
+```
+flutter-create-mvc --help
+
+Output:
+
+flutter-create-mvc [option] [value]
+Options:
+      --version       Show version number                              [boolean]
+  -n, --name          mvc name                                       [string]
+  -a, --all           with all (getx, mqtt, http, ble) packages        [boolean]
+  -g, --get           with GetX                                        [boolean]
+  -h, --http          with http                                        [boolean]
+  -m, --mqtt          with mqtt                                        [boolean]
+  -b, --ble           with ble                                         [boolean]
+      --no-pub, --np  cancel updating pubspec.yaml file                [boolean]
+      --no-git, --ng  do not initialize git                            [boolean]
+      --help          Show help                                        [boolean]
+```
+
+So, for example, to create flutter app, `my_app` with getx, mqtt packages. You can run below command:
+
+```
+flutter-create-mvc -n my_app -g -m
+```
+
+**\*NOTE**: You can just run `flutter-create-mvc` to provide/choose necessary options\*
+
+<br/>
+
+<a id="alt"></a>
+
+### Alternatively, you can skip linking and directly run below commands:
+
+Move to the folder where you wish to setup your flutter application and run the script using
+
+To see all the options. Run
+
+```
+node ./${YOUR-SCRIPT_LOCATION}/create-flutter-app-mvc.js --help
+```
+
+```
+node ./${YOUR-SCRIPT_LOCATION}/create-flutter-app-mvc.js
+```
+
+### Description:
 
 1. This will run the script and the first prompt within the script would be to name your flutter app (follow underscore pattern, eg: dummy_app).
 
