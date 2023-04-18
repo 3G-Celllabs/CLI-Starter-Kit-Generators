@@ -1,0 +1,15 @@
+@import "src/global";
+
+section {
+  width: 100%;
+  height: 100%;
+  background: var(--app-color-white);
+  @include flex();
+  article {
+    @include flex();
+    p {
+      color: var(--app-color-grey);
+      font-size: 1.6rem;
+    }
+  }
+}

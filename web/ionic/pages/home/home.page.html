@@ -1,0 +1,14 @@
+<app-bar [removeBorder]="true"></app-bar>
+
+<ion-content>
+  <div *ngIf="loading;else Data">
+    <app-loader></app-loader>
+  </div>
+  <ng-template #Data>
+    <section>
+      <article>
+        <p>Welcome Home!</p>
+      </article>
+    </section>
+  </ng-template>
+</ion-content>

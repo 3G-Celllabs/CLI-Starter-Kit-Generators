@@ -1,0 +1,24 @@
+@import "src/global";
+
+section {
+  background: var(--app-color-white);
+  color: var(--app-color-grey);
+  width: 100%;
+  height: 100%;
+  @include flex($direction: column, $justify: space-between);
+  padding: 1rem;
+  article {
+    flex: 1;
+    @include flex($direction: column, $justify: center, $gap: 2rem);
+    p {
+      font-size: 1.6rem;
+    }
+    button {
+      width: 30rem;
+    }
+  }
+  .version {
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+}

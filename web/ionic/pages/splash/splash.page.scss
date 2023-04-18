@@ -1,0 +1,64 @@
+@import "../../../global";
+ion-content {
+  max-width: 100%;
+}
+section {
+  background: var(--app-color-white);
+  width: 100%;
+  height: 100%;
+  @include flex();
+  position: relative;
+  article {
+    @include flex();
+    width: 70%;
+    max-width: 60rem;
+    height: 30%;
+    animation: walk-in 1s ease-out normal;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      animation: pulse 1s ease-in-out 1s alternate infinite;
+    }
+    .circle {
+      background: var(--app-color-primary);
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      animation: fill-circle 2s ease-in normal;
+      animation-delay: 2s;
+      opacity: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+    }
+  }
+}
+@keyframes walk-in {
+  from {
+    transform: translateY(1000px) scale(0.6);
+  }
+  to {
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes pulse {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(0.85);
+  }
+}
+
+@keyframes fill-circle {
+  0% {
+    opacity: 0.9;
+    transform: translate(-50%) scale(0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%) scale(100);
+  }
+}

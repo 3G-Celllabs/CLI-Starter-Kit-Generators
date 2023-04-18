@@ -1,0 +1,25 @@
+<ion-menu
+  side="start"
+  swipeGesture="false"
+  menuId="app-menu"
+  contentId="main"
+  class="app-menu"
+>
+  <ion-header>
+    <h2>Menu</h2>
+    <ion-icon name="close" (click)="closeMenu()"></ion-icon>
+  </ion-header>
+  <ion-content>
+    <section>
+      <ul>
+        <li (click)="handleClick()">
+          <p>Menu 1</p>
+          <ion-icon name="chevron-forward-outline"></ion-icon>
+        </li>
+      </ul>
+      <button class="primary-button" (click)="handleSignOut()">
+        <span>Log out</span>
+      </button>
+    </section>
+  </ion-content>
+</ion-menu>

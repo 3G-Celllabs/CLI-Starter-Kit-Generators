@@ -1,0 +1,11 @@
+@import "src/styles";
+
+section {
+  @include flex();
+  article {
+    @include flex();
+    p {
+      font-size: 1.6rem;
+    }
+  }
+}

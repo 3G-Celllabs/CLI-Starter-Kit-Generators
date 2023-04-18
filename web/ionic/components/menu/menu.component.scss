@@ -1,0 +1,61 @@
+@import "src/global";
+
+.app-menu {
+  max-width: var(--web-width);
+  margin: auto;
+  ion-header {
+    height: calc(env(safe-area-inset-top) + 8rem); //for iOS 11
+    height: calc(constant(safe-area-inset-top) + 8rem); //for iOS 11.2
+    @include flex($justify: flex-end);
+    padding: 0 1rem;
+    padding-top: env(safe-area-inset-top); //for iOS 11
+    padding-top: constant(safe-area-inset-top); //for iOS 11.2
+    background: #fafafa;
+    color: var(--app-color-primary);
+    h2 {
+      flex: 1;
+      text-align: center;
+    }
+    ion-icon {
+      cursor: pointer;
+      color: inherit;
+      font-size: 2.8rem;
+    }
+  }
+  section {
+    height: 100%;
+    @include flex($direction: column, $justify: space-between);
+    background: #fafafa;
+    ul {
+      width: 100%;
+      height: 100%;
+      color: var(--app-color-primary);
+
+      li {
+        width: 84%;
+        height: 6rem;
+        @include flex($align: flex-end, $justify: space-between, $gap: 1rem);
+        margin: auto;
+        padding: 1rem;
+        cursor: pointer;
+        list-style: none;
+        border-bottom: 1px solid #b6b6b6;
+        p {
+          flex: 1;
+          font-size: 1.6rem;
+          font-weight: 400;
+        }
+        ion-icon {
+          font-size: 2rem;
+        }
+      }
+    }
+    .primary-button {
+      width: 70%;
+      @include flex($gap: 1rem);
+      margin-bottom: 2.8rem;
+      background: #e6260a;
+      outline: none;
+    }
+  }
+}

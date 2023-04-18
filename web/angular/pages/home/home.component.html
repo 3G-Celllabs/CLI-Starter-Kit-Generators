@@ -1,0 +1,11 @@
+<div class="wrapper">
+  <app-bar></app-bar>
+  <div *ngIf="loading; else Data"></div>
+  <ng-template #Data>
+    <section>
+      <article>
+        <p>Welcome Home!</p>
+      </article>
+    </section>
+  </ng-template>
+</div>
