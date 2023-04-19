@@ -1,13 +1,14 @@
-import { Component } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
-import { MenuComponent } from './components/menu/menu.component';
+import { Component } from "@angular/core";
+import { IonicModule } from "@ionic/angular";
+import { MenuComponent } from "./components/menu/menu.component";
+import { HttpClientModule } from "@angular/common/http";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: 'app.component.html',
-  styleUrls: ['app.component.scss'],
+  selector: "app-root",
+  templateUrl: "app.component.html",
+  styleUrls: ["app.component.scss"],
   standalone: true,
-  imports: [IonicModule, MenuComponent],
+  imports: [IonicModule, HttpClientModule, MenuComponent],
 })
 export class AppComponent {
   constructor() {}
