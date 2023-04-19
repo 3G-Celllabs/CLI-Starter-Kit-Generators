@@ -8,6 +8,8 @@ The scripts can be found inside the `/scripts` folder and every script contains 
 
 `/flutter` folder contains dart utility classes that assist in generating the flutter app.
 
+`/web` folder contains `/angular`, `/ionic` folders which in itself contains utility files that assist in generating the required web app.
+
 ## Flutter Scripts
 
 There are two different scripts that can be used to generate flutter apps.
