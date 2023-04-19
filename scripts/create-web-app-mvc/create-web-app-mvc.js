@@ -13,6 +13,7 @@ const {
 
 const { ask } = require("./utils/ask");
 const { updateGit } = require("./main/update-git");
+const { executeCommand } = require("./utils/execute-command");
 
 const additionalPackages = [
   { name: "crypto-js", checked: false, url: "routes/routes.dart" },
@@ -133,6 +134,9 @@ async function handleInstallAdditionalPackages() {
       });
   }
   await installAdditionalPackages(packagesToInstall);
+  if (packagesToInstall.includes("crypto-js")) {
+    await executeCommand("npm install -D @types/crypto-js");
+  }
 }
 
 function checkIfselectedPackageIsSameAsCurrent(package) {
