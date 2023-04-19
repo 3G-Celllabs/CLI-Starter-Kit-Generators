@@ -14,7 +14,7 @@ const folders = [
 const { changeWorkingDirectory } = require("../utils/change-working-directory");
 const { createFolder } = require("../utils/create-folder");
 
-exports.generateFolders = () => {
+exports.generateFolders = (projectName) => {
   changeWorkingDirectory(projectName, true);
   console.log("\n");
 

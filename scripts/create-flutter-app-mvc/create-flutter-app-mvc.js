@@ -80,7 +80,7 @@ const argv = require("yargs/yargs")(process.argv.slice(2))
 
   await initializeFlutterProject(projectName);
 
-  generateFolders();
+  generateFolders(projectName);
 
   await installDefaultPackages();
 
