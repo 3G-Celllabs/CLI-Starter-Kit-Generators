@@ -6,7 +6,8 @@ const util = require("util");
 const stream = require("stream");
 const pipeline = util.promisify(stream.pipeline);
 
-const baseUrl = "https://gitlab.com/pranay.prasad/utilities/-/raw/main/web/";
+const baseUrl =
+  "https://raw.githubusercontent.com/3G-Celllabs/CLI-Starter-Kit-Generators/main/web/";
 
 exports.copyFile = async (fileUrl, destFolder = null, folder = "ionic/") => {
   if (destFolder == null) destFolder = fileUrl;

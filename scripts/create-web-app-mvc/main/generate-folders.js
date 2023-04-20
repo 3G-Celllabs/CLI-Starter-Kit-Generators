@@ -1,9 +1,7 @@
 const folders = [
   "src/app/components",
-  "src/app/guards",
   "src/app/helpers",
   "src/app/models",
-  "src/app/modules",
   "src/app/pages",
   "src/app/services",
 ];

@@ -22,5 +22,5 @@ exports.updateGit = async (projectName) => {
   console.log("\n");
   ora("Initializing Git")
     .start()
-    .succeed(chalk.green("Git Initialized successfully"));
+    .succeed(chalk.green("Git updated successfully"));
 };

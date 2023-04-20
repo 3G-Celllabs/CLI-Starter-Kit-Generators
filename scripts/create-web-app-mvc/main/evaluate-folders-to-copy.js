@@ -1,11 +1,15 @@
 const axios = require("axios");
 const chalk = require("chalk");
+const fs = require("fs");
+const ora = require("ora");
 
 const { copyFolders } = require("../utils/copy-folder");
+const { delay } = require("../utils/delay");
 
-const folders = ["components", "guards", "modules", "pages", "services"];
+const folders = ["components", "pages", "services"];
 
-const baseEndPoint = "https://gitlab.com/api/v4/projects/44403343/repository";
+const baseEndPoint =
+  "https://api.github.com/repos/3G-Celllabs/CLI-Starter-Kit-Generators/contents";
 
 exports.evaluateFoldersToCopy = async (
   type,
@@ -24,6 +28,13 @@ exports.evaluateFoldersToCopy = async (
       isMqttInstalled,
       type
     );
+    await delay(1000);
+  }
+
+  // Delete home folder top level.
+  if (type === "ionic") {
+    fs.rmSync("home", { recursive: true, force: true });
+    ora("").succeed(chalk.green(`Home folder deleted successfully.`));
   }
 };
 
@@ -35,9 +46,8 @@ async function evaluateAndCopyFolders(
 ) {
   try {
     const { data } = await axios.get(
-      `${baseEndPoint}/tree?path=web/${endPointFolder}/${currentFolder}&ref=main`
+      `${baseEndPoint}/web/${endPointFolder}/${currentFolder}`
     );
-
     for (const obj of data) {
       if (
         currentFolder === "services" &&
@@ -52,10 +62,11 @@ async function evaluateAndCopyFolders(
       ) {
         return;
       }
-      await copyFolders(
-        obj.path,
-        `${currentFolder}/${obj.path.split("/").pop()}`
-      );
+      const newFolder = obj.path.split("/").pop();
+      const destination = `${currentFolder}/${newFolder}`;
+      fs.mkdirSync(`${destination}`);
+      delay(1000);
+      await copyFolders(obj.path, `${destination}`);
     }
   } catch (error) {
     console.error(chalk.red(`Error fetching folders: ${error}`));

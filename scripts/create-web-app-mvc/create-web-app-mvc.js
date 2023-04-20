@@ -14,6 +14,8 @@ const {
 const { ask } = require("./utils/ask");
 const { updateGit } = require("./main/update-git");
 const { executeCommand } = require("./utils/execute-command");
+const { delay } = require("./utils/delay");
+const { checkVersions } = require("./main/check-versions");
 
 const additionalPackages = [
   { name: "crypto-js", checked: false, url: "routes/routes.dart" },
@@ -71,6 +73,16 @@ const argv = require("yargs/yargs")(process.argv.slice(2))
     console.error(chalk.red(`Error: Invalid type of app. [ionic|angular]`));
     process.exit(1);
   }
+
+  const versionsBelowRequirement = await checkVersions(argv.type.toLowerCase());
+
+  if (versionsBelowRequirement) {
+    console.error(chalk.red(`Error: Minimum platform requirements not met.`));
+    process.exit(1);
+  } else {
+    console.log(chalk.green(`Minimum platform requirements met.`));
+  }
+
   const projectName = argv.name ?? (await ask("Enter app name: (ex: my_app)"));
 
   await initializeWebProject(projectName, argv.type.toLowerCase());
@@ -89,6 +101,7 @@ const argv = require("yargs/yargs")(process.argv.slice(2))
     isCryptoInstalled,
     isMqttInstalled
   );
+  await delay(3000);
 
   await updateGit(projectName);
 

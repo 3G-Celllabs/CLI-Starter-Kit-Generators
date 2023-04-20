@@ -10,7 +10,9 @@ exports.initializeWebProject = async (answer, type) => {
     ora("").fail(chalk.red("Error: Please provide a project name."));
     process.exit(1);
   } else if (!answer.match(/^[a-z]+(?:_[a-z]+)*$/g)) {
-    ora("").fail(chalk.red("Error: Invalid app name. Only camelCase words."));
+    ora("").fail(
+      chalk.red("Error: Invalid app name. Only kebab(_) case words.")
+    );
     process.exit(1);
   } else if (fs.readdirSync(process.cwd()).includes(answer)) {
     ora("").fail(chalk.red("Error: Project already exists."));

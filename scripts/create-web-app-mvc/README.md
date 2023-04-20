@@ -2,7 +2,11 @@
 
 ## uses default folder structure
 
-<br/>
+**NOTE**: Use `Angular 15+`, `Ionic 7+` for generating apps.
+
+**INFO**:Generated apps follow standalone components [Read more here](https://angular.io/guide/standalone-components)
+
+<hr/>
 
 ### Instructions:
 
@@ -10,13 +14,15 @@ This is a node script that helps with initializing your web (Ionic|Angular) app 
 
 First thing first, (If you don't have it) Install node from [Node.js](https://nodejs.org/en/download/)
 
-Go to script folder and install dependencies using
+Download and Go to script folder and install dependencies using
 
 ```
 npm install
 ```
 
-#### Instructions to setup the script to run from anywhere. Skip to [Alternate](#alt), if not needed
+#### Instructions to setup the script to run from anywhere:
+
+Skip to [Alternate](#alt), if not needed
 
 The script can run directly from your terminal. For that to happen, you need to link it by running
 
@@ -34,7 +40,7 @@ Move to the folder where you want to create the web app and run
 (use, **-a** to generate all the folders and files. If you wish to choose what to include don't add **-a**)
 
 ```
-web-create-mvc
+web-create-mvc -t ionic
 ```
 
 To see help menu, run
@@ -97,7 +103,7 @@ node ./${YOUR-SCRIPT_LOCATION}/create-web-app-mvc.js -t [ionic|angular]
 5. It will also copy some example/default files from
 
 ```
-https://gitlab.com/pranay.prasad/utilities/-/raw/main/web/
+https://github.com/3G-Celllabs/CLI-Starter-Kit-Generators/tree/main/web
 ```
 
 which will help with development and help you understand how to structure the app. Based on your what packages you choose to install above, It will even copy the service files with base implementation.

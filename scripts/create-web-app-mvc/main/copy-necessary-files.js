@@ -1,5 +1,10 @@
+const chalk = require("chalk");
+const fs = require("fs");
+const ora = require("ora");
+
 const { changeWorkingDirectory } = require("../utils/change-working-directory");
 const { copyFile } = require("../utils/copy-file");
+const { delay } = require("../utils/delay");
 
 exports.copyNecessaryFiles = async (type) => {
   if (type === "ionic") {
@@ -7,8 +12,9 @@ exports.copyNecessaryFiles = async (type) => {
     await copyFile("tsconfig.json");
     await delay(1000);
 
-    // Copy global.scss
+    // Copy main.ts, global.scss
     changeWorkingDirectory("src/");
+    await copyFile("main.ts");
     await copyFile("global.scss");
     await delay(1000);
 
@@ -32,6 +38,7 @@ exports.copyNecessaryFiles = async (type) => {
 
     // Copy styles.scss
     changeWorkingDirectory("src/");
+    await copyFile("main.ts", null, angular);
     await copyFile("styles.scss", null, angular);
     await delay(1000);
 
@@ -42,18 +49,22 @@ exports.copyNecessaryFiles = async (type) => {
     await delay(1000);
 
     // Copy favicon
-    changeWorkingDirectory("../assets/icon");
+    changeWorkingDirectory("../assets/icon/");
     copyFile("favicon.png", null, angular);
     await delay(1000);
 
     //Copy app files
     changeWorkingDirectory("../../app/");
+
     await copyFile("app.component.html", null, angular);
-    await copyFile("app-routing.module.ts", null, angular);
-    await copyFile("app.module.ts", null, angular);
+    await copyFile("app.component.ts", null, angular);
+    await copyFile("app.routes.ts", null, angular);
+
+    // Delete app.module and app-routing.module
+    fs.rmSync("app.module.ts", { force: true });
+    fs.rmSync("app-routing.module.ts", { force: true });
+    ora("").succeed(
+      chalk.green(`app.module and app-routing.module deleted successfully.`)
+    );
   }
 };
-
-function delay(time) {
-  return new Promise((resolve) => setTimeout(resolve, time));
-}
