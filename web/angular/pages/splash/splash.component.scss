@@ -3,15 +3,14 @@
 section {
   background: var(--app-color-white);
   max-width: 100%;
-  height: 100%;
-  max-height: 100vh;
+  height: 100vh;
   @include flex();
   position: relative;
   article {
     @include flex();
     width: 70%;
     max-width: 60rem;
-    height: 30%;
+    height: 100%;
     animation: walk-in 1s ease-out normal;
     img {
       width: 12rem;

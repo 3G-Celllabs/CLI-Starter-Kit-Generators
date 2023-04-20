@@ -1,12 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
+import { loginRoute } from "src/app/app-routing.module";
 
 @Component({
-  selector: 'app-splash',
-  templateUrl: './splash.component.html',
-  styleUrls: ['./splash.component.scss'],
+  selector: "app-splash",
+  templateUrl: "./splash.component.html",
+  styleUrls: ["./splash.component.scss"],
 })
 export class SplashComponent implements OnInit {
-  constructor() {}
+  constructor(private router: Router) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    setTimeout(() => this.router.navigateByUrl(loginRoute), 3000);
+  }
 }

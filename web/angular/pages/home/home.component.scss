@@ -1,11 +1,15 @@
 @import "src/styles";
 
-section {
-  @include flex();
-  article {
+main {
+  height: 100vh;
+  section {
+    height: calc(100% - var(--appbar-height));
     @include flex();
-    p {
-      font-size: 1.6rem;
+    article {
+      @include flex();
+      p {
+        font-size: 1.6rem;
+      }
     }
   }
 }

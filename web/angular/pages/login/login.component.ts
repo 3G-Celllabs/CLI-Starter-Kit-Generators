@@ -1,13 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { AuthService } from 'src/app/services/auth/auth.service';
-import { APP_VERSION, environment } from 'src/environments/environment';
+import { Component, OnInit } from "@angular/core";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Router } from "@angular/router";
+import { homeRoute } from "src/app/app-routing.module";
+import { AuthService } from "src/app/services/auth/auth.service";
+import { APP_VERSION, environment } from "src/environments/environment";
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+  selector: "app-login",
+  templateUrl: "./login.component.html",
+  styleUrls: ["./login.component.scss"],
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
@@ -19,11 +20,11 @@ export class LoginComponent implements OnInit {
     private router: Router
   ) {
     if (this.authService.userData) {
-      this.router.navigateByUrl('home');
+      // this.router.navigateByUrl(homeRoute);
     }
     this.loginForm = this.formBuilder.group({
-      userId: ['', [Validators.required]],
-      password: ['', Validators.required],
+      userId: ["", [Validators.required]],
+      password: ["", Validators.required],
     });
   }
 
@@ -35,5 +36,6 @@ export class LoginComponent implements OnInit {
 
   handleLogin() {
     //  Implement logic
+    this.router.navigateByUrl("home");
   }
 }
