@@ -3,7 +3,7 @@ const fs = require("fs");
 const chalk = require("chalk");
 
 const baseUrl =
-  "https://gitlab.com/pranay.prasad/utilities/-/raw/main/flutter/";
+  "https://raw.githubusercontent.com/3G-Celllabs/CLI-Starter-Kit-Generators/main/flutter";
 
 exports.copyFile = async (fileUrl, destFolder) => {
   return new Promise((resolve, reject) => {

@@ -118,7 +118,7 @@ flutter pub run flutter_launcher_icons
 7. It will also copy some example/default files from
 
 ```
-https://gitlab.com/pranay.prasad/utilities/-/raw/main/flutter/
+https://github.com/3G-Celllabs/CLI-Starter-Kit-Generators/tree/main/flutter
 ```
 
 which will help with development and help you understand how to structure the app. Based on your what packages you choose to install above, It will even copy the service files with base implementation.
