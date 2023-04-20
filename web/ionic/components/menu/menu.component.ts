@@ -1,21 +1,21 @@
-import { Component, OnInit } from '@angular/core';
-import { IonicModule, MenuController } from '@ionic/angular';
-import { AuthService } from 'src/app/services/auth/auth.service';
+import { Location } from "@angular/common";
+import { Component, OnInit } from "@angular/core";
+import { IonicModule, MenuController } from "@ionic/angular";
 
 @Component({
-  selector: 'app-menu',
-  templateUrl: './menu.component.html',
-  styleUrls: ['./menu.component.scss'],
+  selector: "app-menu",
+  templateUrl: "./menu.component.html",
+  styleUrls: ["./menu.component.scss"],
   standalone: true,
   imports: [IonicModule],
 })
 export class MenuComponent implements OnInit {
-  constructor(private menu: MenuController, private authService: AuthService) {}
+  constructor(private menu: MenuController, private location: Location) {}
 
   ngOnInit() {}
 
   closeMenu() {
-    this.menu.close('app-menu');
+    this.menu.close("app-menu");
   }
 
   handleClick() {
@@ -24,6 +24,6 @@ export class MenuComponent implements OnInit {
 
   handleSignOut() {
     this.closeMenu();
-    this.authService.logout(this.authService.userData!);
+    this.location.back();
   }
 }

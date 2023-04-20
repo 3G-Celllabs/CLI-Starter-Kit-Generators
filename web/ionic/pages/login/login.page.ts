@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { IonicModule } from '@ionic/angular';
+import { homeRoute } from 'src/app/app.routes';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { APP_VERSION, environment } from 'src/environments/environment';
 
@@ -8,6 +10,8 @@ import { APP_VERSION, environment } from 'src/environments/environment';
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
+  standalone: true,
+  imports: [IonicModule],
 })
 export class LoginPage implements OnInit {
   loginForm: FormGroup;
@@ -34,7 +38,7 @@ export class LoginPage implements OnInit {
   }
 
   handleLogin() {
-    this.router.navigateByUrl('home');
+    this.router.navigateByUrl(homeRoute);
     //  Implement logic
   }
 }

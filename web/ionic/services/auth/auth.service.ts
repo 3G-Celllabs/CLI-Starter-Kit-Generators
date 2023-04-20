@@ -1,15 +1,14 @@
-import { UserDetails } from 'src/app/models/user-details';
-import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { Routes } from 'src/app/helpers/api-routes';
-import { HttpService } from 'src/app/services/http/http.service';
-import { EncryptionService } from 'src/app/services/encryption/encryption.service';
-import { ToastService } from 'src/app/services/toast/toast.service';
+import { UserDetails } from "src/app/models/user-details";
+import { Injectable } from "@angular/core";
+import { Router } from "@angular/router";
+import { BehaviorSubject, Observable } from "rxjs";
+import { map } from "rxjs/operators";
+import { Routes } from "src/app/helpers/api-routes";
+import { HttpService } from "src/app/services/http/http.service";
+import { ToastService } from "src/app/services/toast/toast.service";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class AuthService {
   public user: Observable<UserDetails | null>;
@@ -18,7 +17,6 @@ export class AuthService {
   constructor(
     private httpService: HttpService,
     private router: Router,
-    private encryptionService: EncryptionService,
     private toastService: ToastService
   ) {
     this.user$ = new BehaviorSubject<UserDetails | null>(null);
@@ -46,7 +44,9 @@ export class AuthService {
   login(username: string, password: string) {
     const body = {
       username,
-      password: this.encryptionService.getEncryptedValue(password),
+      // Make sure to encrypt password, can use this.encryptionService.getEncryptedValue(password)
+      // if crypto-js is installed
+      password: password,
     };
     return this.httpService.postData({ route: Routes.routes.login, body }).pipe(
       map((userDetails) => {
@@ -57,24 +57,32 @@ export class AuthService {
   }
 
   logout(userDetails: UserDetails) {
-    this.httpService.logout(userDetails).subscribe(
-      (_: any) => {
+    this.httpService.logout(userDetails).subscribe({
+      next: (_: any) => {
         localStorage.clear();
-        this.router.navigateByUrl('login');
+        this.router.navigateByUrl("login");
         this.user$.next(null);
       },
-      (error: any) => {
+      error: (error: any) => {
         if (error.status === 401) {
           localStorage.clear();
-          this.router.navigateByUrl('login');
+          this.router.navigateByUrl("login");
         } else {
           this.toastService.presentToast({
             message:
               error?.error?.detailedErrorMessage ??
-              'Something went wrong. Please, try again.',
+              "Something went wrong. Please, try again.",
           });
         }
-      }
-    );
+      },
+    });
+  }
+
+  userAuthenticatedGuard() {
+    return this.userData;
+  }
+
+  userAuthorizedGuard() {
+    return true;
   }
 }
