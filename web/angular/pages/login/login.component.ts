@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
-import { homeRoute } from "src/app/app-routing.module";
+import { homeRoute } from "src/app/app.routes";
 import { AuthService } from "src/app/services/auth/auth.service";
 import { APP_VERSION, environment } from "src/environments/environment";
 
@@ -9,6 +9,7 @@ import { APP_VERSION, environment } from "src/environments/environment";
   selector: "app-login",
   templateUrl: "./login.component.html",
   styleUrls: ["./login.component.scss"],
+  standalone: true,
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
@@ -35,7 +36,7 @@ export class LoginComponent implements OnInit {
   }
 
   handleLogin() {
+    this.router.navigateByUrl(homeRoute);
     //  Implement logic
-    this.router.navigateByUrl("home");
   }
 }

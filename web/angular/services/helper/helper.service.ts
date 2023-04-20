@@ -1,10 +1,9 @@
-/* eslint-disable @typescript-eslint/quotes */
-import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
-import { environment } from 'src/environments/environment';
+import { Injectable } from "@angular/core";
+import { Subject } from "rxjs";
+import { environment } from "src/environments/environment";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class HelperService {
   menuData$: Subject<{ sensorName: string; sensorType: number }[]> =
@@ -13,7 +12,7 @@ export class HelperService {
   constructor() {}
 
   getDevicePlatform(): string {
-    return 'web';
+    return "web";
   }
 
   log(msg: any, isError = false) {
@@ -39,7 +38,7 @@ export class HelperService {
     return (
       obj !== undefined &&
       obj !== null &&
-      obj !== '' &&
+      obj !== "" &&
       (obj?.length > 0 || Object.keys(obj).length > 0)
     );
   }

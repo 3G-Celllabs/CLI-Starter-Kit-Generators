@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/naming-convention */
 import { Injectable, Injector } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { APP_VERSION } from "src/environments/environment";
