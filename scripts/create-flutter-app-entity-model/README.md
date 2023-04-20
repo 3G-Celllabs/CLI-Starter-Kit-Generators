@@ -111,14 +111,14 @@ flutter pub run flutter_launcher_icons
 ```
 
 5. Next the script will ask you to choose addiitional packages that could be helpful.
-   Current options: 'get', 'http', 'mqtt_client', 'flutter_reactive_ble'. Enter either 'y' or 'n' based on your need.
+   Current options: 'get', 'http', 'mqtt_client', 'flutter_reactive_ble'. choose based on your need.
 
 6. Once these packages are installed, The script will create some default files. such as, constants.dart that will help with application development.
 
 7. It will also copy some default files from
 
 ```
-https://gitlab.com/pranay.prasad/utilities/-/raw/main/flutter/
+https://github.com/3G-Celllabs/CLI-Starter-Kit-Generators/tree/main/flutter
 ```
 
 &nbsp;&nbsp;&nbsp;&nbsp;which will help with development and help you understand how to structure the app. Based on your what packages you choose to install above, It will even copy the service files with base implementation.

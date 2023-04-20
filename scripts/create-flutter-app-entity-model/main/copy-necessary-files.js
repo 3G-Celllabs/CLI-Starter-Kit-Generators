@@ -8,7 +8,6 @@ const {
 } = require("../utils/split-directory-based-on-platform");
 
 exports.copyNecessaryFiles = async (additionalPackages) => {
-  console.log(process.cwd());
   changeWorkingDirectory("../assets/images/bitmaps");
 
   // Copy assets
