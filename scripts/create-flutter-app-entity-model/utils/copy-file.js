@@ -3,7 +3,7 @@ const fs = require("fs");
 const chalk = require("chalk");
 
 const baseUrl =
-  "https://raw.githubusercontent.com/3G-Celllabs/CLI-Starter-Kit-Generators/main/flutter";
+  "https://raw.githubusercontent.com/3G-Celllabs/CLI-Starter-Kit-Generators/main/flutter/";
 
 exports.copyFile = async (fileUrl, destFolder) => {
   return new Promise((resolve, reject) => {
@@ -20,6 +20,7 @@ exports.copyFile = async (fileUrl, destFolder) => {
         console.log(chalk.yellow(`Added ${destFolder.split("/").pop()} file`));
       });
       res.on("end", () => {
+        console.log(`${destFolder.split("/").pop()} created.`);
         resolve(null);
       });
     });
