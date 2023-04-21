@@ -11,7 +11,8 @@ exports.updatePubspec = async () => {
     const dataToAppend = `
   assets:
     - assets/.env
-    - assets/images
+    - assets/images/bitmaps/
+    - assets/images/svgs/
 
 flutter_icons:
   android: "launcher_icon"
