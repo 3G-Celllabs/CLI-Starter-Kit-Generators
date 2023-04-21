@@ -22,7 +22,7 @@ class _SplashScreenState extends State<SplashScreen> {
       body: SafeArea(
         child: Center(
           child: Image.asset(
-            'assets/images/logo.png',
+            'assets/images/bitmaps/logo.png',
             fit: BoxFit.contain,
             width: 200.0,
             height: 200.0,
