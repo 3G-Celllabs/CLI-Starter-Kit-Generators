@@ -9,6 +9,10 @@ exports.updatePubspec = async () => {
 
   return new Promise((resolve, reject) => {
     const dataToAppend = `
+  assets:
+    - assets/.env
+    - assets/images
+
 flutter_icons:
   android: "launcher_icon"
   ios: true
