@@ -1,6 +1,6 @@
+const chalk = require("chalk");
 const util = require("util");
 const exec = util.promisify(require("child_process").exec);
-const chalk = require("chalk");
 
 exports.executeCommand = async (command, showLogs = false) => {
   try {

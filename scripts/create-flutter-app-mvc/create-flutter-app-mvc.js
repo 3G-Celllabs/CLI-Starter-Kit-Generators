@@ -27,9 +27,15 @@ const additionalPackages = [
     checked: false,
     url: "services/ble_service.dart",
   },
+  {
+    name: "freezed",
+    checked: false,
+    url: null,
+  },
 ];
 
 const packagesToInstall = [];
+const devPackagesToInstall = [];
 
 const argv = require("yargs/yargs")(process.argv.slice(2))
   .option("name", {
@@ -60,6 +66,11 @@ const argv = require("yargs/yargs")(process.argv.slice(2))
   .option("ble", {
     alias: "b",
     describe: "with ble",
+    boolean: true,
+  })
+  .option("freezed", {
+    alias: "f",
+    describe: "with freezed model",
     boolean: true,
   })
   .option("no-pub", {
@@ -107,11 +118,16 @@ async function handleInstallAdditionalPackages() {
       package.checked = true;
       packagesToInstall.push(package.name);
     });
-  } else if (argv.get || argv.http || argv.mqtt || argv.ble) {
+    handleFreezed();
+  } else if (argv.get || argv.http || argv.mqtt || argv.ble || argv.freezed) {
     additionalPackages.forEach((package) => {
       if (checkIfselectedPackageIsSameAsCurrent(package)) {
         package.checked = true;
-        packagesToInstall.push(package.name);
+        if (package.name == "freezed") {
+          handleFreezed();
+        } else {
+          packagesToInstall.push(package.name);
+        }
       }
     });
   } else {
@@ -129,7 +145,11 @@ async function handleInstallAdditionalPackages() {
           additionalPackages.forEach((package) => {
             if (package.name === answer) {
               package.checked = true;
-              packagesToInstall.push(package.name);
+              if (package.name == "freezed") {
+                handleFreezed();
+              } else {
+                packagesToInstall.push(package.name);
+              }
             }
           });
         });
@@ -139,7 +159,7 @@ async function handleInstallAdditionalPackages() {
         process.exit(1);
       });
   }
-  await installAdditionalPackages(packagesToInstall);
+  await installAdditionalPackages(packagesToInstall, devPackagesToInstall);
 }
 
 function checkIfselectedPackageIsSameAsCurrent(package) {
@@ -147,6 +167,16 @@ function checkIfselectedPackageIsSameAsCurrent(package) {
     (argv.get && package.name === "get") ||
     (argv.http && package.name === "http") ||
     (argv.mqtt && package.name === "mqtt_client") ||
-    (argv.ble && package.name === "flutter_reactive_ble")
+    (argv.ble && package.name === "flutter_reactive_ble") ||
+    (argv.fre && package.name === "freezed")
   );
+}
+
+function handleFreezed() {
+  packagesToInstall.push("freezed_annotation");
+  packagesToInstall.push("json_annotation");
+
+  devPackagesToInstall.push("build_runner");
+  devPackagesToInstall.push("freezed");
+  devPackagesToInstall.push("json_serializable");
 }
