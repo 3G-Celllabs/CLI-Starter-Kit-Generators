@@ -11,7 +11,8 @@
   "keywords": [],
   "author": "3G Celllabs Pvt Ltd.",
   "contributors": [
-    "Pranay Prasad V <pranay.prasad@celllabs.com>"
+    "Pranay Prasad V <pranay.prasad@celllabs.com>",
+    "GaneshCelllabs <ganesh.a@celllabs.com>"
   ],
   "license": "ISC",
   "dependencies": {
