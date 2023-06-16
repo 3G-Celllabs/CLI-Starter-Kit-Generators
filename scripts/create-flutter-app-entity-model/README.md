@@ -8,9 +8,9 @@
 
 This is a node script that helps with initializing your flutter app with entity folder structure where controllers, models, views, services etc., are bundled for each entity such as Home, Login etc.,.
 
-First thing first, (If you don't have it) Install node from [Node.js](https://nodejs.org/en/download/)
+First thing first, (If you don't have it) **Install node** from [Node.js](https://nodejs.org/en/download/)
 
-Go to script folder and install dependencies using
+Go to **script folder** and install dependencies using
 
 ```
 npm install
@@ -29,7 +29,7 @@ Once linked, you can run the script by calling `flutter-create-entity` from any 
 
 ### Below are the commands:
 
-Move to the folder where you want to create the flutter app and run
+**Move to the folder** where you want to create the flutter app and run
 
 (use, **-a** to generate all the folders and files. If you wish to choose what to include don't add **-a**)
 
@@ -72,16 +72,16 @@ flutter-create-entity -n my_app -g -m
 
 ### Alternatively, you can skip linking and directly run below commands:
 
-Move to the folder where you wish to setup your flutter application and run the script using
+**Move to the folder** where you wish to setup your flutter application and run the script using
 
 To see all the options. Run
 
 ```
-node ./[YOUR-SCRIPT_LOCATION]/create-flutter-app-entity-model.js --help
+node ./[YOUR_SCRIPT_LOCATION]/create-flutter-app-entity-model.js --help
 ```
 
 ```
-node ./[YOUR-SCRIPT_LOCATION]/create-flutter-app-entity-model.js
+node ./[YOUR_SCRIPT_LOCATION]/create-flutter-app-entity-model.js
 ```
 
 ### Description:

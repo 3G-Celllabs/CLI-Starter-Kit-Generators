@@ -4,7 +4,7 @@
 
 **NOTE**: Use `Angular 15+`, `Ionic 7+` for generating apps.
 
-**INFO**:Generated apps follow standalone components [Read more here](https://angular.io/guide/standalone-components)
+**INFO**: Generated apps follows [standalone components](https://angular.io/guide/standalone-components) pattern.
 
 <hr/>
 
@@ -12,9 +12,9 @@
 
 This is a node script that helps with initializing your web (Ionic|Angular) app with default folder structure where controllers, models, views, services etc., are split into their respective folders.
 
-First thing first, (If you don't have it) Install node from [Node.js](https://nodejs.org/en/download/)
+First thing first, (If you don't have it) **Install node** from [Node.js](https://nodejs.org/en/download/)
 
-Download and Go to script folder and install dependencies using
+Go to **script folder** and install dependencies using
 
 ```
 npm install
@@ -35,7 +35,7 @@ Once linked, you can run the script by calling `web-create-mvc` from any path
 
 ### Below are the commands:
 
-Move to the folder where you want to create the web app and run
+**Move to the folder** where you want to create the web app and run
 
 (use, **-a** to generate all the folders and files. If you wish to choose what to include don't add **-a**)
 
@@ -77,7 +77,7 @@ web-create-mvc -t ionic -n my_app -m -l
 
 ### Alternatively, you can skip linking and directly run below commands:
 
-Move to the folder where you wish to setup your web application and run the script using
+**Move to the folder** where you wish to setup your web application and run the script using
 
 To see all the options. Run
 

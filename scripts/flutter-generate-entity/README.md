@@ -6,9 +6,9 @@
 
 This is a node script that helps generating entity for flutter app. That means controllers, services, models etc., are bundled into entity folders such as Home, Login etc.,
 
-First thing first, (If you don't have it) Install node from [Node.js](https://nodejs.org/en/download/)
+First thing first, (If you don't have it) **Install node** from [Node.js](https://nodejs.org/en/download/)
 
-Go to script folder and install dependencies using
+Go to **script folder** and install dependencies using
 
 ```
 npm install
@@ -27,7 +27,7 @@ Once linked, you can run the script by calling `flutter-gen` from any path
 
 ### Below are the commands:
 
-Move to the flutter app folder and run
+**Move to the flutter app folder** and run
 
 (use, **-a** to generate all the folders and files. If you wish to choose what to include don't add **-a**)
 
@@ -56,7 +56,7 @@ Options:
 
 ### Alternatively, you can skip linking and directly run below commands:
 
-Move to the folder where you wish to setup your flutter application and run the script using
+**Move to the folder** where you wish to setup your flutter application and run the script using
 
 (use, **-a** to generate all the folders and files. If you wish to choose what to include dont add **-a**)
 

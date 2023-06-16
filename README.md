@@ -12,13 +12,17 @@ The scripts can be found inside the `/scripts` folder and every script contains 
 
 ## Before you start
 
-1.You would need to either clone the scripts (Preferable) or download it before continuing any further.
+1.You would need to either **clone** the scripts (Preferable) or **download** it before continuing any further.
+
 - To clone, run
+
 ```
 git clone https://github.com/3G-Celllabs/CLI-Starter-Kit-Generators.git
 ```
-in your desired location. 
-- To download, go to [CLI-Starter-Kit-Generators](https://github.com/3G-Celllabs/CLI-Starter-Kit-Generators.git) and click on "Code" dropdown. Select "Download ZIP".  Extract in desired location.
+
+in your desired location.
+
+- To download, go to [CLI-Starter-Kit-Generators](https://github.com/3G-Celllabs/CLI-Starter-Kit-Generators.git) and click on **Code** dropdown. Select **Download ZIP**. Extract in desired location.
 
 Then, move to required script folder and follow the internal README.md instructions.
 
