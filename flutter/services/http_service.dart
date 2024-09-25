@@ -4,17 +4,30 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 
 class HttpService {
-  static final http.Client _client = http.Client();
-  static final String _baseUrl = dotenv.get('BASE_URL');
+  static final HttpService _singleton = HttpService._internal();
 
-  static Future<http.Response> get({
+  factory HttpService() {
+    return _singleton;
+  }
+
+  HttpService._internal();
+
+  final http.Client _client = http.Client();
+  final String _baseUrl = dotenv.get('BASE_URL');
+
+  Future<http.Response> get({
     required String url,
     String params = '',
     Map<String, String>? header,
+    Map<String, dynamic>? queryParams,
   }) async {
     try {
       final response = await _client.get(
-        Uri.parse('$_baseUrl$url?$params'),
+        _buildUri(
+          url,
+          params: params,
+          queryParams: queryParams,
+        ),
         headers: header,
       );
       return response;
@@ -25,7 +38,7 @@ class HttpService {
     }
   }
 
-  static Future<http.Response> post({
+  Future<http.Response> post({
     required String url,
     required Map<String, dynamic> body,
     required Map<String, String> headers,
@@ -36,7 +49,7 @@ class HttpService {
         () => 'application/json',
       );
       final response = await _client.post(
-        Uri.parse(_baseUrl + url),
+        _buildUri(url),
         headers: headers,
         body: jsonEncode(body),
       );
@@ -48,7 +61,7 @@ class HttpService {
     }
   }
 
-  static Future<http.Response> delete({
+  Future<http.Response> delete({
     required String url,
     Map<String, dynamic>? body,
     required Map<String, String> headers,
@@ -59,7 +72,7 @@ class HttpService {
         () => 'application/json',
       );
       final response = await _client.delete(
-        Uri.parse(_baseUrl + url),
+        _buildUri(url),
         headers: headers,
         body: jsonEncode(body),
       );
@@ -71,22 +84,7 @@ class HttpService {
     }
   }
 
-  static http.Response _buildSocketError(error) {
-    return _buildErrorResponse(
-      msg: 'Please, check your internet connection.',
-      error: 'Socket Exception: $error',
-      isSocketException: true,
-    );
-  }
-
-  static http.Response _buildGenericError(error) {
-    return _buildErrorResponse(
-      msg: 'Something went wrong. Please, try again.',
-      error: 'Other Exception: $error',
-    );
-  }
-
-  static http.Response _buildErrorResponse({
+  http.Response _buildErrorResponse({
     required String msg,
     required dynamic error,
     bool isSocketException = false,
@@ -97,5 +95,40 @@ class HttpService {
       ),
       isSocketException ? 000 : 999,
     );
+  }
+
+  http.Response _buildGenericError(error) {
+    return _buildErrorResponse(
+      msg: 'Something went wrong. Please, try again.',
+      error: 'Other Exception: $error',
+    );
+  }
+
+  http.Response _buildSocketError(error) {
+    return _buildErrorResponse(
+      msg: 'Please, check your internet connection.',
+      error: 'Socket Exception: $error',
+      isSocketException: true,
+    );
+  }
+
+  Uri _buildUri(
+    String url, {
+    String? params,
+    Map<String, dynamic>? queryParams,
+    bool customUrl = false,
+  }) {
+    String finalUrl = url;
+    if (params != null && params.isNotEmpty) {
+      finalUrl = '$finalUrl?$params';
+    }
+    if (!customUrl) {
+      finalUrl = '$_baseUrl$finalUrl';
+    }
+    Uri uri = Uri.parse(finalUrl);
+    if (queryParams != null) {
+      uri = uri.replace(queryParameters: queryParams);
+    }
+    return uri;
   }
 }
