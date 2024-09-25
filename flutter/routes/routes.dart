@@ -1,15 +1,18 @@
 import 'package:get/get.dart';
 
-const String splashScreen = '/';
-const String homeScreen = '/home';
+class Routes {
+  static String splash = '/';
+  static String login = '/login';
+  static String home = '/home';
+}
 
-List<GetPage> routes() => [
+final List<GetPage> routes() = [
       GetPage(
-        name: splashScreen,
+        name: Routes.splash,
         page: () => const SplashScreen(),
       ),
       GetPage(
-        name: homeScreen,
+        name: Routes.home,
         page: () => const HomeScreen(),
         binding: HomeBinding(),
       ),
