@@ -1,9 +1,17 @@
 import 'package:flutter_reactive_ble/flutter_reactive_ble.dart';
 
 class BleService {
-  static final _flutterReactiveBle = FlutterReactiveBle();
+  static final BleService _singleton = BleService._internal();
 
-  static Stream<DiscoveredDevice> scanForDevices({
+  factory BleService() {
+    return _singleton;
+  }
+
+  BleService._internal();
+
+  final _flutterReactiveBle = FlutterReactiveBle();
+
+  Stream<DiscoveredDevice> scanForDevices({
     List<Uuid>? withServices,
     scanMode = ScanMode.lowLatency,
   }) {
@@ -13,7 +21,15 @@ class BleService {
     );
   }
 
-  static Stream<ConnectionStateUpdate> connectToDevice({
+  Stream<BleStatus> listenBleStatus() {
+    return _flutterReactiveBle.statusStream;
+  }
+
+  Stream<ConnectionStateUpdate> connectedDeviceStream() {
+    return _flutterReactiveBle.connectedDeviceStream;
+  }
+
+  Stream<ConnectionStateUpdate> connectToDevice({
     required String deviceId,
     Map<Uuid, List<Uuid>>? servicesWithCharacteristicsToDiscover,
     int timeOut = 2,
@@ -26,24 +42,35 @@ class BleService {
     );
   }
 
-  static Future<List<DiscoveredService>> discoverServices(
-      {required String deviceId}) async {
-    return await _flutterReactiveBle.discoverServices(deviceId);
-  }
-
-  static QualifiedCharacteristic buildCharacteristic({
-    required Uuid characteristicId,
-    required Uuid serviceId,
+//Will connect to advertising device and avoids issue of trying to connect to a device that is not is the range.
+// ReadMore: https://pub.dev/packages/flutter_reactive_ble#establishing-connection
+  Stream<ConnectionStateUpdate> connectToAdvertisingDevice({
     required String deviceId,
+    Map<Uuid, List<Uuid>>? servicesWithCharacteristicsToDiscover,
+    List<Uuid>? services,
+    int prescanTimeout = 5,
+    int connectionTimeout = 2,
   }) {
-    return QualifiedCharacteristic(
-      characteristicId: characteristicId,
-      serviceId: serviceId,
-      deviceId: deviceId,
+    return _flutterReactiveBle.connectToAdvertisingDevice(
+      id: deviceId,
+      withServices: services ?? [],
+      prescanDuration: Duration(seconds: prescanTimeout),
+      servicesWithCharacteristicsToDiscover:
+          servicesWithCharacteristicsToDiscover ?? {},
+      connectionTimeout: Duration(seconds: connectionTimeout),
     );
   }
 
-  static Future<BleReadResponse> readDataFromDevice({
+  Future<List<Service>> discoverServices({required String deviceId}) async {
+    try {
+      await _flutterReactiveBle.discoverAllServices(deviceId);
+      return await _flutterReactiveBle.getDiscoveredServices(deviceId);
+    } catch (error) {
+      rethrow;
+    }
+  }
+
+  Future<BleReadResponse> readDataFromDevice({
     required DiscoveredCharacteristic readChar,
     required String deviceId,
   }) async {
@@ -61,7 +88,7 @@ class BleService {
     }
   }
 
-  static Future<BleWriteResponse> writeDataToDevice({
+  Future<BleWriteResponse> writeDataToDevice({
     required List<int> data,
     required DiscoveredCharacteristic writeChar,
     required String deviceId,
@@ -90,7 +117,7 @@ class BleService {
     }
   }
 
-  static Stream<List<int>> subscribeToNotifyCharacteristic({
+  Stream<List<int>> subscribeToCharacteristic({
     required DiscoveredCharacteristic notifyChar,
     required String deviceId,
   }) {
@@ -104,8 +131,8 @@ class BleService {
 
   // This function can be used if the data sent to device is larger in size
   // For Android the max size is 517 but 512 is optimal
-  // This wouldn't work for IOS, MTU size supported in IOS is 185 bytes
-  static Future<BleNegotiateMtuResponse> negotiateMtuSize({
+  // This mostly wouldn't work for IOS. But, it would return the current MTU.
+  Future<BleNegotiateMtuResponse> negotiateMtuSize({
     required String deviceId,
     required int requiredMtuSize,
   }) async {
@@ -119,6 +146,26 @@ class BleService {
     } catch (e) {
       return BleNegotiateMtuResponse(null, e);
     }
+  }
+
+  Future<void> clearAndroidGattCache({required String deviceId}) async {
+    try {
+      await _flutterReactiveBle.clearGattCache(deviceId);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  QualifiedCharacteristic buildCharacteristic({
+    required Uuid characteristicId,
+    required Uuid serviceId,
+    required String deviceId,
+  }) {
+    return QualifiedCharacteristic(
+      characteristicId: characteristicId,
+      serviceId: serviceId,
+      deviceId: deviceId,
+    );
   }
 }
 
