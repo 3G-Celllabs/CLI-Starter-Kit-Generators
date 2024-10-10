@@ -1,19 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ExitDialog extends StatelessWidget {
-  final String heading;
-  final String yesLabel;
-  final String noLabel;
-  final void Function() handleYes;
-
-  const ExitDialog({
+class AppExitDialog extends StatelessWidget {
+  const AppExitDialog({
     super.key,
     required this.heading,
     required this.yesLabel,
     this.noLabel = 'Cancel',
     required this.handleYes,
+    this.handleNo,
   });
+
+  final String heading;
+  final String yesLabel;
+  final String noLabel;
+  final void Function() handleYes;
+  final void Function()? handleNo;
+
+  void _handleNo() {
+    if (handleNo != null) {
+      handleNo!();
+    } else {
+      Get.back();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +73,7 @@ class ExitDialog extends StatelessWidget {
           SizedBox(
             height: 48.0,
             child: GestureDetector(
-              onTap: () => Get.back(),
+              onTap: handleNo,
               child: Center(
                 child: Text(
                   noLabel,
