@@ -6,14 +6,14 @@ class Routes {
   static String home = '/home';
 }
 
-final List<GetPage> routes() = [
-      GetPage(
-        name: Routes.splash,
-        page: () => const SplashScreen(),
-      ),
-      GetPage(
-        name: Routes.home,
-        page: () => const HomeScreen(),
-        binding: HomeBinding(),
-      ),
-    ];
+final List<GetPage> routes = [
+  GetPage(
+    name: Routes.splash,
+    page: () => const SplashScreen(),
+  ),
+  GetPage(
+    name: Routes.home,
+    page: () => const HomeScreen(),
+    binding: HomeBinding(),
+  ),
+];
