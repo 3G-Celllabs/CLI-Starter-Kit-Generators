@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:get/route_manager.dart';
 
 class AppExitDialog extends StatelessWidget {
   const AppExitDialog({
@@ -30,7 +30,7 @@ class AppExitDialog extends StatelessWidget {
     return SizedBox(
       width: Get.width * 0.72,
       child: SimpleDialog(
-        backgroundColor: AppThemeColors.white,
+        backgroundColor: kWhite,
         insetPadding:
             const EdgeInsets.symmetric(horizontal: 28.0, vertical: 24.0),
         shape: RoundedRectangleBorder(
@@ -45,15 +45,17 @@ class AppExitDialog extends StatelessWidget {
             child: Center(
               child: Text(
                 heading,
-                style: Theme.of(Get.context!).textTheme.bodyLarge!.copyWith(
+                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                       fontWeight: FontWeight.w600,
-                      color: AppThemeColors.textPrimaryColor,
+                      color: Theme.of(context).colorScheme.onPrimary,
                     ),
                 textAlign: TextAlign.center,
               ),
             ),
           ),
-          const Divider(color: AppThemeColors.dividerColor),
+          Divider(
+            color: Theme.of(context).colorScheme.outline,
+          ),
           SizedBox(
             height: 48.0,
             child: GestureDetector(
@@ -61,25 +63,27 @@ class AppExitDialog extends StatelessWidget {
               child: Center(
                 child: Text(
                   yesLabel,
-                  style: Theme.of(Get.context!).textTheme.bodyLarge!.copyWith(
+                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                         fontWeight: FontWeight.w600,
-                        color: AppThemeColors.textErrorColor,
+                        color: Theme.of(context).colorScheme.onError,
                       ),
                 ),
               ),
             ),
           ),
-          const Divider(color: AppThemeColors.dividerColor),
+          Divider(
+            color: Theme.of(context).colorScheme.outline,
+          ),
           SizedBox(
             height: 48.0,
             child: GestureDetector(
-              onTap: handleNo,
+              onTap: _handleNo,
               child: Center(
                 child: Text(
                   noLabel,
-                  style: Theme.of(Get.context!).textTheme.bodyLarge!.copyWith(
+                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                         fontWeight: FontWeight.w600,
-                        color: AppThemeColors.textSecondaryColor,
+                        color: Theme.of(context).colorScheme.onSecondary,
                       ),
                 ),
               ),

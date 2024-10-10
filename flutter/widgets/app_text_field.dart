@@ -55,7 +55,7 @@ class _AppTextFieldState extends State<AppTextField> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          FieldLabel(label: widget.label),
+          AppFieldLabel(label: widget.label),
           Focus(
             onFocusChange: _handleFocusChange,
             child: TextFormField(
