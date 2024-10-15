@@ -1,13 +1,11 @@
-// import 'package:app/auth/login/models/user/user.dart';
-// import 'package:app/dashboard/nav/nav_controller.dart';
-// import 'package:app/routes.dart';
-// import 'package:app/utilities/constants.dart';
-// import 'package:app/utilities/services/storage_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 class UserController extends GetxController {
+  UserController({required this.storageService});
+
+  final StorageService storageService;
   final user = (const UnknownUser() as User).obs;
   final appVersion = ''.obs;
 
@@ -35,14 +33,13 @@ class UserController extends GetxController {
   }
 
   _evaluateUserFromStorage() {
-    final data = StorageService.getData(Constants.userDetailsInStorage);
+    final data = storageService.getData(Constants.userDetailsInStorage);
     if (data != null) {
       user.value = User.fromJson(data);
     }
   }
 
   _handleValueChange(User value) {
-    debugPrint(value.toString());
     switch (value) {
       case ValidUser():
         _redirectToHome();
@@ -62,7 +59,7 @@ class UserController extends GetxController {
   _redirectToHome() {
     Future.delayed(
       const Duration(seconds: 1),
-      () => Get.offAllNamed(Routes.dashboard),
+      () => Get.offAllNamed(Routes.home),
     );
   }
 }
