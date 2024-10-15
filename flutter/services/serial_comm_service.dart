@@ -71,13 +71,14 @@ class SerialCommService {
     SerialException result;
     switch (exception) {
       case SerialExceptionTypes.connection:
-        result = SerialException('Unable to establish connection', exception);
+        result = SerialException(
+            msg: 'Unable to establish connection', type: exception);
         break;
       case SerialExceptionTypes.device:
-        result = SerialException('Device not found', exception);
+        result = SerialException(msg: 'Device not found', type: exception);
         break;
       case SerialExceptionTypes.port:
-        result = SerialException('Port not setup', exception);
+        result = SerialException(msg: 'Port not setup', type: exception);
         break;
     }
     return result;
@@ -92,14 +93,14 @@ class SerialCommService {
   }
 }
 
+class SerialException {
+  SerialException({this.msg = '', required this.type});
+  final String msg;
+  final SerialExceptionTypes type;
+}
+
 enum SerialExceptionTypes {
   connection,
   device,
   port,
-}
-
-class SerialException {
-  final String msg;
-  final SerialExceptionTypes type;
-  SerialException(this.msg, this.type);
 }
