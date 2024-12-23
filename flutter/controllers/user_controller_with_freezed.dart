@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import '../constants.dart';
 
 class UserController extends GetxController {
   UserController({required this.storageService});
@@ -52,14 +53,14 @@ class UserController extends GetxController {
   _redirectToLogin() {
     Future.delayed(
       const Duration(seconds: 1),
-      // () => Get.toNamed(Routes.login),
+      // () => Get.toNamed(Constants.loginRoute),
     );
   }
 
   _redirectToHome() {
     Future.delayed(
       const Duration(seconds: 1),
-      () => Get.offAllNamed(Routes.home),
+      () => Get.offAllNamed(Constants.homeRoute),
     );
   }
 }

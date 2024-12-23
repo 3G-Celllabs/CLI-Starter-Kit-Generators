@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/route_manager.dart';
+import 'constants.dart';
 
 void main() async {
   await dotenv.load(fileName: "assets/.env");
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme(),
       darkTheme: AppTheme.darkTheme(),
-      initialRoute: Routes.welcome,
+      initialRoute: Constants.splashRoute,
       getPages: routes(),
     );
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
+import '../constants.dart';
 
 class AppText extends StatelessWidget {
   const AppText({

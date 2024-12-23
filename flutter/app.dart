@@ -1,6 +1,7 @@
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
+import 'constants.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -12,7 +13,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme(context),
       darkTheme: AppTheme.lightTheme(context),
-      initialRoute: Routes.splash,
+      initialRoute: Constants.splashRoute,
       getPages: routes,
     );
   }
@@ -31,7 +32,7 @@ class MyAppWithDevicePreview extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme(context),
       darkTheme: AppTheme.darkTheme(context),
-      initialRoute: Routes.splash,
+      initialRoute: Constants.splashRoute,
       getPages: routes,
     );
   }
