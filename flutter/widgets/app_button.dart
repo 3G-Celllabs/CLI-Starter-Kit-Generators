@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/route_manager.dart';
 
 class AppButton extends StatelessWidget {
   const AppButton({
@@ -26,7 +25,8 @@ class AppButton extends StatelessWidget {
   final Size? minimumSize;
   final EdgeInsetsGeometry? padding;
 
-  factory AppButton.primary({
+  factory AppButton.primary(
+    BuildContext context, {
     Color? bg,
     double borderRadius = 12.0,
     required clickHandler,
@@ -37,7 +37,7 @@ class AppButton extends StatelessWidget {
     EdgeInsetsGeometry? padding,
   }) =>
       AppButton(
-        btnStyle: Theme.of(Get.context!).elevatedButtonTheme.style?.copyWith(
+        btnStyle: Theme.of(context).elevatedButtonTheme.style?.copyWith(
               shape: WidgetStatePropertyAll(
                 RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(borderRadius),
@@ -50,15 +50,17 @@ class AppButton extends StatelessWidget {
         isDisabled: isDisabled,
         isPrimary: true,
         label: AppText.subHeading16(
+          context,
           text: label,
           fontWeight: FontWeight.w400,
-          color: Theme.of(Get.context!).colorScheme.surface,
+          color: Theme.of(context).colorScheme.surface,
         ),
         minimumSize: minimumSize,
         padding: padding,
       );
 
-  factory AppButton.secondary({
+  factory AppButton.secondary(
+    BuildContext context, {
     Color? bg,
     double borderRadius = 12.0,
     required clickHandler,
@@ -69,7 +71,7 @@ class AppButton extends StatelessWidget {
     EdgeInsetsGeometry? padding,
   }) =>
       AppButton(
-        btnStyle: Theme.of(Get.context!).outlinedButtonTheme.style?.copyWith(
+        btnStyle: Theme.of(context).outlinedButtonTheme.style?.copyWith(
               shape: WidgetStatePropertyAll(
                 RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(borderRadius),
@@ -77,7 +79,7 @@ class AppButton extends StatelessWidget {
               ),
               side: WidgetStatePropertyAll<BorderSide>(
                 BorderSide(
-                  color: bg ?? Theme.of(Get.context!).colorScheme.primary,
+                  color: bg ?? Theme.of(context).colorScheme.primary,
                   width: 1.0,
                 ),
               ),
@@ -88,15 +90,17 @@ class AppButton extends StatelessWidget {
         isDisabled: isDisabled,
         isPrimary: false,
         label: AppText.subHeading16(
+          context,
           text: label,
-          color: fg ?? Theme.of(Get.context!).colorScheme.primary,
+          color: fg ?? Theme.of(context).colorScheme.primary,
           fontWeight: FontWeight.w400,
         ),
         minimumSize: minimumSize,
         padding: padding,
       );
 
-  factory AppButton.tertiary({
+  factory AppButton.tertiary(
+    BuildContext context, {
     required clickHandler,
     required label,
     bool isDisabled = false,
@@ -104,12 +108,12 @@ class AppButton extends StatelessWidget {
     EdgeInsetsGeometry? padding,
   }) =>
       AppButton(
-        btnStyle: Theme.of(Get.context!).outlinedButtonTheme.style?.copyWith(
+        btnStyle: Theme.of(context).outlinedButtonTheme.style?.copyWith(
               minimumSize: WidgetStatePropertyAll(minimumSize),
               padding: WidgetStatePropertyAll(padding),
               side: WidgetStatePropertyAll<BorderSide>(
                 BorderSide(
-                  color: Theme.of(Get.context!).colorScheme.onTertiary,
+                  color: Theme.of(context).colorScheme.onTertiary,
                   width: 1.0,
                 ),
               ),
@@ -118,8 +122,9 @@ class AppButton extends StatelessWidget {
         isDisabled: isDisabled,
         isPrimary: false,
         label: AppText.subHeading16(
+          context,
           text: label,
-          color: Theme.of(Get.context!).colorScheme.onSecondary,
+          color: Theme.of(context).colorScheme.onSecondary,
           fontWeight: FontWeight.w400,
         ),
         minimumSize: minimumSize,

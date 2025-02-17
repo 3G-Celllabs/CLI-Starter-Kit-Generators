@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/route_manager.dart';
 
 class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
   const AppAppBar({
@@ -14,11 +13,11 @@ class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String label;
   final void Function()? backHandler;
 
-  void _goBack() {
+  void _goBack(BuildContext context) {
     if (backHandler != null) {
       backHandler!();
     } else {
-      Get.back();
+      Navigator.of(context).pop();
     }
   }
 
@@ -31,7 +30,7 @@ class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
           Icons.chevron_left_rounded,
           size: 16.0,
         ),
-        onPressed: _goBack,
+        onPressed: () => _goBack(context),
       ),
       title: AppText(
         text: label,

@@ -1,6 +1,6 @@
 import 'dart:math';
 import 'package:flutter/widgets.dart';
-import 'package:get/get.dart';
+// import 'package:get/get.dart';
 
 class AppLogoBlock extends StatelessWidget {
   const AppLogoBlock({this.width, this.height, super.key});
@@ -18,10 +18,20 @@ class AppLogoBlock extends StatelessWidget {
         height: height ?? defaultWidth,
         child: Center(
           child: AppImage.asset(
-            path: Get.isDarkMode ? Images.logo : Images.logo,
+            path: getPath(context),
           ),
         ),
       ),
     );
+  }
+
+  String getPath(BuildContext context) {
+    String path = '';
+    if (MediaQuery.of(context).platformBrightness == Brightness.light) {
+      path = Images.logo;
+    } else {
+      path = Images.logo;
+    }
+    return path;
   }
 }

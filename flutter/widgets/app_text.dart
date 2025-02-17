@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/route_manager.dart';
 
 class AppText extends StatelessWidget {
   const AppText({
@@ -13,7 +12,8 @@ class AppText extends StatelessWidget {
   final TextStyle? style;
   final TextAlign? textAlign;
 
-  factory AppText.heading24({
+  factory AppText.heading24(
+    BuildContext context, {
     required String text,
     TextAlign textAlign = TextAlign.center,
     FontWeight? fontWeight,
@@ -21,14 +21,15 @@ class AppText extends StatelessWidget {
   }) =>
       AppText(
         text: text,
-        style: Theme.of(Get.context!).textTheme.headlineSmall?.copyWith(
+        style: Theme.of(context).textTheme.headlineSmall?.copyWith(
               color: color,
               fontWeight: fontWeight,
             ),
         textAlign: textAlign,
       );
 
-  factory AppText.heading20({
+  factory AppText.heading20(
+    BuildContext context, {
     required String text,
     TextAlign? textAlign,
     FontWeight? fontWeight,
@@ -36,14 +37,15 @@ class AppText extends StatelessWidget {
   }) =>
       AppText(
         text: text,
-        style: Theme.of(Get.context!).textTheme.titleLarge?.copyWith(
+        style: Theme.of(context).textTheme.titleLarge?.copyWith(
               color: color,
               fontWeight: fontWeight,
             ),
         textAlign: textAlign,
       );
 
-  factory AppText.subHeading16({
+  factory AppText.subHeading16(
+    BuildContext context, {
     required String text,
     TextAlign? textAlign,
     FontWeight? fontWeight,
@@ -51,28 +53,29 @@ class AppText extends StatelessWidget {
   }) =>
       AppText(
         text: text,
-        style: Theme.of(Get.context!).textTheme.titleMedium?.copyWith(
+        style: Theme.of(context).textTheme.titleMedium?.copyWith(
               color: color,
               fontWeight: fontWeight,
             ),
         textAlign: textAlign,
       );
 
-  factory AppText.bold(
+  factory AppText.bold(BuildContext context,
           {required String text,
           TextAlign? textAlign,
           Color? color,
           double? fontSize}) =>
       AppText(
         text: text,
-        style: Theme.of(Get.context!).textTheme.labelLarge?.copyWith(
+        style: Theme.of(context).textTheme.labelLarge?.copyWith(
               color: color,
               fontSize: fontSize,
             ),
         textAlign: textAlign,
       );
 
-  factory AppText.body14({
+  factory AppText.body14(
+    BuildContext context, {
     required String text,
     TextAlign textAlign = TextAlign.center,
     Color? color,
@@ -80,14 +83,15 @@ class AppText extends StatelessWidget {
   }) =>
       AppText(
         text: text,
-        style: Theme.of(Get.context!).textTheme.bodyMedium?.copyWith(
+        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
               color: color,
               fontWeight: fontWeight,
             ),
         textAlign: textAlign,
       );
 
-  factory AppText.label12({
+  factory AppText.label12(
+    BuildContext context, {
     required String text,
     TextAlign? textAlign,
     Color? color,
@@ -96,7 +100,7 @@ class AppText extends StatelessWidget {
   }) =>
       AppText(
         text: text,
-        style: Theme.of(Get.context!).textTheme.bodySmall?.copyWith(
+        style: Theme.of(context).textTheme.bodySmall?.copyWith(
               color: color,
               fontWeight: fontWeight,
               fontSize: fontSize,

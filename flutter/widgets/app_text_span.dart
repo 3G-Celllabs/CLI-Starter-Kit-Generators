@@ -1,9 +1,9 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:get/route_manager.dart';
 
 class AppTextSpan {
-  static TextSpan heading({
+  static TextSpan heading(
+    BuildContext context, {
     required String text,
     Color? color,
     double fontSize = 24.0,
@@ -11,15 +11,16 @@ class AppTextSpan {
   }) {
     return TextSpan(
       text: text,
-      style: Theme.of(Get.context!).textTheme.titleSmall?.copyWith(
-            color: color ?? Theme.of(Get.context!).colorScheme.onSurface,
+      style: Theme.of(context).textTheme.titleSmall?.copyWith(
+            color: color ?? Theme.of(context).colorScheme.onSurface,
             fontSize: fontSize,
             fontWeight: fontWeight,
           ),
     );
   }
 
-  static TextSpan subHeading({
+  static TextSpan subHeading(
+    BuildContext context, {
     required String text,
     Color? color,
     FontWeight? fontWeight,
@@ -27,15 +28,16 @@ class AppTextSpan {
   }) {
     return TextSpan(
       text: text,
-      style: Theme.of(Get.context!).textTheme.labelLarge?.copyWith(
-            color: color ?? Theme.of(Get.context!).colorScheme.onSecondary,
+      style: Theme.of(context).textTheme.labelLarge?.copyWith(
+            color: color ?? Theme.of(context).colorScheme.onSecondary,
             fontWeight: fontWeight,
           ),
       recognizer: recognizer,
     );
   }
 
-  static TextSpan body({
+  static TextSpan body(
+    BuildContext context, {
     required String text,
     Color? color,
     fontSize = 16.0,
@@ -45,8 +47,8 @@ class AppTextSpan {
   }) {
     return TextSpan(
       text: text,
-      style: Theme.of(Get.context!).textTheme.bodyMedium?.copyWith(
-            color: color ?? Theme.of(Get.context!).colorScheme.onPrimary,
+      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+            color: color ?? Theme.of(context).colorScheme.onPrimary,
             decoration: decoration,
             fontSize: fontSize,
             fontWeight: fontWeight,
@@ -55,7 +57,8 @@ class AppTextSpan {
     );
   }
 
-  static TextSpan label({
+  static TextSpan label(
+    BuildContext context, {
     required String text,
     Color? color,
     TextDecoration decoration = TextDecoration.lineThrough,
@@ -63,8 +66,8 @@ class AppTextSpan {
   }) {
     return TextSpan(
       text: text,
-      style: Theme.of(Get.context!).textTheme.bodySmall?.copyWith(
-            color: color ?? Theme.of(Get.context!).colorScheme.onPrimary,
+      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+            color: color ?? Theme.of(context).colorScheme.onPrimary,
             decoration: decoration,
             fontWeight: fontWeight,
           ),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/route_manager.dart';
 
 class AppExitDialog extends StatelessWidget {
   const AppExitDialog({
@@ -17,18 +16,18 @@ class AppExitDialog extends StatelessWidget {
   final void Function() handleYes;
   final void Function()? handleNo;
 
-  void _handleNo() {
+  void _handleNo(BuildContext context) {
     if (handleNo != null) {
       handleNo!();
     } else {
-      Get.back();
+      Navigator.of(context).pop();
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: Get.width * 0.72,
+      width: MediaQuery.of(context).size.width * 0.72,
       child: SimpleDialog(
         backgroundColor: kWhite,
         insetPadding:
@@ -77,7 +76,7 @@ class AppExitDialog extends StatelessWidget {
           SizedBox(
             height: 48.0,
             child: GestureDetector(
-              onTap: _handleNo,
+              onTap: () => _handleNo(context),
               child: Center(
                 child: Text(
                   noLabel,
