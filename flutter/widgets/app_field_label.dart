@@ -21,6 +21,7 @@ class AppFieldLabel extends StatelessWidget {
     if (label.isNotEmpty) {
       widgets = [
         AppText.subHeading16(
+          context,
           text: label,
           color: Theme.of(context).colorScheme.onTertiary,
           fontWeight: FontWeight.w400,
