@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:get/route_manager.dart';
 import 'package:uuid/uuid.dart';
 
 class Utilities {
@@ -16,8 +15,8 @@ class Utilities {
     return const Uuid().v4();
   }
 
-  static bool isKeyboardOpen() {
-    return MediaQuery.of(Get.context!).viewInsets.bottom != 0;
+  static bool isKeyboardOpen(BuildContext ctx) {
+    return MediaQuery.of(ctx).viewInsets.bottom != 0;
   }
 
   static int doubleToInt(double value) {
